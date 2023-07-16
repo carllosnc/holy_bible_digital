@@ -1,8 +1,4 @@
-# Flutter Starter
-
-```
-gh repo clone C4co/flutter_starter app_name
-```
+# Holy Bible Digital
 
 ### Layers
 
