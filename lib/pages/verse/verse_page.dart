@@ -36,7 +36,6 @@ class _VersePageState extends State<VersePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Stack(
               children: [

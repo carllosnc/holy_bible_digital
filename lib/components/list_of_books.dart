@@ -10,6 +10,14 @@ class ListOfBooks extends StatelessWidget {
   Widget build(BuildContext context) {
     final BibleRepository bibleRepository = BibleRepository();
 
+    String testament(int index) {
+      if (index < 39) {
+        return 'AT';
+      } else {
+        return 'NT';
+      }
+    }
+
     return FutureBuilder(
       future: bibleRepository.readBibleJson(),
       builder: (context, AsyncSnapshot<Bible> snapshot) {
@@ -44,10 +52,12 @@ class ListOfBooks extends StatelessWidget {
               ),
               leading: Text(
                 "${index + 1}",
-                style: const TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 15),
               ),
               trailing: const Icon(Icons.chevron_right_outlined),
-              subtitle: Text('${book.chapters.length} capítulos'),
+              subtitle: Text(
+                '${testament(index)} · ${book.chapters.length} capítulos',
+              ),
             );
           },
         );
