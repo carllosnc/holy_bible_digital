@@ -12,7 +12,5 @@ void main() {
     Bible bible = await bibleRepository.readBibleJson();
 
     expect(bible.books.length, 66);
-
-    print(bible.books[0].chapters[0].runtimeType);
   });
 }
