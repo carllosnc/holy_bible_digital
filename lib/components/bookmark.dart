@@ -26,7 +26,8 @@ class Bookmark extends StatelessWidget {
 
         return Container(
           height: 55,
-          color: Theme.of(context).colorScheme.primary,
+          color:
+              Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.7),
           child: Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -35,13 +36,20 @@ class Bookmark extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Wrap(
-                      spacing: 5,
+                      spacing: 10,
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
+                        //icon pin
+                        const Icon(
+                          Icons.push_pin_outlined,
+                          size: 20,
+                        ),
                         Text(
-                          '📌 ${book.name.adaptName()} - Cap. ${chapterIndex + 1}',
+                          '${book.name.adaptName()} - Cap. ${chapterIndex + 1}',
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSecondaryContainer,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -50,26 +58,16 @@ class Bookmark extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 30,
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        side: BorderSide(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        ),
-                      ),
+                    child: FilledButton(
                       onPressed: () {
                         var extras = {
                           'book': bookIndex,
                           'chapter': chapterIndex,
                         };
-
                         context.go('/book', extra: extras);
                       },
-                      child: Text(
+                      child: const Text(
                         'Continuar',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        ),
                       ),
                     ),
                   ),
