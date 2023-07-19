@@ -8,58 +8,45 @@ class ListOfBooks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BibleRepository bibleRepository = BibleRepository();
+    final BibleService bibleService = BibleService();
 
     String testament(int index) {
       if (index < 39) {
-        return 'AT';
+        return 'VT';
       } else {
         return 'NT';
       }
     }
 
-    return FutureBuilder(
-      future: bibleRepository.readBibleJson(),
-      builder: (context, AsyncSnapshot<Bible> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+    return ListView.builder(
+      itemCount: bibleService.bible.books.length,
+      itemBuilder: (context, index) {
+        Book book = bibleService.bible.books[index];
 
-        Bible bible = snapshot.data!;
+        var extras = {
+          'book': index,
+          'chapter': 0,
+        };
 
-        return ListView.builder(
-          itemCount: bible.books.length,
-          itemBuilder: (context, index) {
-            Book book = bible.books[index];
-
-            var extras = {
-              'book': book,
-              'page': 0,
-            };
-
-            return ListTile(
-              onTap: () {
-                context.push('/book', extra: extras);
-              },
-              title: Text(
-                book.name,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              leading: Text(
-                "${index + 1}",
-                style: const TextStyle(fontSize: 15),
-              ),
-              trailing: const Icon(Icons.chevron_right_outlined),
-              subtitle: Text(
-                '${testament(index)} · ${book.chapters.length} capítulos',
-              ),
-            );
+        return ListTile(
+          onTap: () {
+            context.push('/book', extra: extras);
           },
+          title: Text(
+            book.name,
+            style: TextStyle(
+              fontSize: 16,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          leading: Text(
+            "${index + 1}",
+            style: const TextStyle(fontSize: 15),
+          ),
+          trailing: const Icon(Icons.chevron_right_outlined),
+          subtitle: Text(
+            '${testament(index)} · ${book.chapters.length} capítulos',
+          ),
         );
       },
     );

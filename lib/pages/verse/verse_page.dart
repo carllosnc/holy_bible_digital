@@ -28,10 +28,6 @@ class _VersePageState extends State<VersePage> {
             onPressed: () {},
             icon: const Icon(Icons.share),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.bookmark_border),
-          ),
         ],
       ),
       body: Center(

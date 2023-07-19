@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
+import '/notifiers/notifiers.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  bool _lightTheme = true;
+
+  final ThemeNotifier _themeNotifier = ThemeNotifier();
+
+  @override
+  void initState() {
+    super.initState();
+    _lightTheme = _themeNotifier.lightTheme.value;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +25,31 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Ajustes', style: TextStyle(fontSize: 18)),
       ),
-      body: const Center(child: Text('Settings')),
+      body: ListView(
+        children: [
+          ListTile(
+            title: Text(_lightTheme ? 'Tema claro' : 'Tema escuro'),
+            trailing: Switch(
+              value: _lightTheme,
+              thumbIcon: MaterialStateProperty.all(
+                Icon(
+                  _lightTheme ? Icons.light_mode : Icons.dark_mode,
+                  color: _lightTheme
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+              onChanged: (bool value) {
+                setState(() {
+                  _themeNotifier.setLightTheme(value);
+                  _lightTheme = value;
+                });
+              },
+            ),
+          ),
+          const Divider(height: 1)
+        ],
+      ),
     );
   }
 }

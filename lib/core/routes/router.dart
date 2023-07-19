@@ -17,11 +17,11 @@ final router = GoRouter(
           builder: (context, state) {
             final extras = state.extra as Map<String, dynamic>;
 
-            final book = extras['book'] as Book;
-            final page = extras['page'] as int;
+            final book = extras['book'] as int;
+            final chapter = extras['chapter'] as int;
 
             return BookPage(
-              page: page,
+              chapter: chapter,
               book: book,
             );
           },

@@ -9,7 +9,7 @@ void main() {
   test('Check bible books', () async {
     final BibleRepository bibleRepository = BibleRepository();
 
-    final Bible bible = await bibleRepository.readBibleJson();
+    Bible bible = await bibleRepository.readBibleJson();
 
     expect(bible.books.length, 66);
 

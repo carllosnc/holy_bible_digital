@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: const ListOfBooks(),
+      bottomNavigationBar: const Bookmark(),
     );
   }
 }
