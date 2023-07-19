@@ -3,7 +3,6 @@ import 'package:flutter_starter/core/helpers/formaters.dart';
 import '/domain/domain.dart';
 import '/components/components.dart';
 import '/data/data.dart';
-import '/notifiers/notifiers.dart';
 
 class BookPage extends StatefulWidget {
   final int book;
@@ -20,56 +19,40 @@ class BookPage extends StatefulWidget {
 }
 
 class _BookPageState extends State<BookPage> {
-  final PageController _pageController = PageController();
-  final ScrollController _scrollController = ScrollController();
-  final BibleService bibleService = BibleService();
-  bool pinned = false;
-  late Book book;
-  late int currentPage;
+  late PageController _pageController;
+  late ScrollController _scrollController;
+  final BibleService _bibleService = BibleService();
+  late Book _book;
+  late int _currentPage;
 
   // call this function when the page is created
   @override
   void initState() {
     super.initState();
 
-    currentPage = widget.chapter;
-    book = bibleService.bible.books[widget.book];
+    _currentPage = widget.chapter;
+    _book = _bibleService.bible.books[widget.book];
 
-    if (BookmarkNotifier().pin.value == "${widget.book}-$currentPage") {
-      pinned = true;
-    }
+    _pageController = PageController(
+      initialPage: _currentPage,
+    );
+
+    _scrollController = ScrollController(
+      initialScrollOffset: ((_currentPage * 60) - 170).toDouble(),
+    );
   }
 
   // call this function when a page is changed
   void pageChangeHandle(index) {
-    if (BookmarkNotifier().pin.value == "${widget.book}-$index") {
-      setState(() {
-        pinned = true;
-      });
-    } else {
-      setState(() {
-        pinned = false;
-      });
-    }
-
     setState(() {
-      currentPage = index;
+      _currentPage = index;
     });
 
     _scrollController.animateTo(
-      ((index * 60) - 170).toDouble(),
+      ((_currentPage * 60) - 170).toDouble(),
       duration: const Duration(milliseconds: 300),
       curve: Curves.ease,
     );
-  }
-
-  // call this function when a chapter is pinned
-  void pinChangeHandle() async {
-    setState(() {
-      pinned = true;
-    });
-
-    BookmarkNotifier().setPin("${widget.book}-$currentPage");
   }
 
   @override
@@ -84,43 +67,26 @@ class _BookPageState extends State<BookPage> {
           ),
         ),
         actions: [
-          CircleAvatar(
-            backgroundColor: pinned
-                ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.background,
-            child: IconButton(
-              onPressed: pinChangeHandle,
-              icon: Icon(
-                Icons.push_pin_outlined,
-                color: pinned
-                    ? Theme.of(context).colorScheme.onPrimary
-                    : Theme.of(context).colorScheme.onBackground,
-              ),
-            ),
+          Pin(
+            key: UniqueKey(),
+            book: widget.book,
+            chapter: _currentPage,
           ),
-          IconButton(
-            onPressed: () {
-              _pageController.animateToPage(
-                currentPage - 1,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeOut,
-              );
-            },
-            icon: const Icon(Icons.chevron_left),
+          Arrow(
+            key: UniqueKey(),
+            type: ArrowType.previous,
+            pageController: _pageController,
+            currentPage: _currentPage,
           ),
-          IconButton(
-            onPressed: () {
-              _pageController.animateToPage(
-                currentPage + 1,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeOut,
-              );
-            },
-            icon: const Icon(Icons.chevron_right),
+          Arrow(
+            key: UniqueKey(),
+            type: ArrowType.next,
+            pageController: _pageController,
+            currentPage: _currentPage,
           ),
         ],
         title: Text(
-          "${book.name.adaptName()} - Cap: ${currentPage + 1}",
+          "${_book.name.adaptName()} - Cap: ${_currentPage + 1}",
           style: const TextStyle(fontSize: 16),
         ),
       ),
@@ -128,14 +94,14 @@ class _BookPageState extends State<BookPage> {
         onPageChanged: pageChangeHandle,
         controller: _pageController,
         children: [
-          for (final chapter in book.chapters)
+          for (final chapter in _book.chapters)
             ListView.separated(
               separatorBuilder: (context, index) => const SizedBox(height: 5),
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               itemCount: chapter.length,
               itemBuilder: (context, index) {
                 String title =
-                    "${book.name} - Cap. ${currentPage + 1} / Ver. ${index + 1}";
+                    "${_book.name} - Cap. ${_currentPage + 1} / Ver. ${index + 1}";
                 String content = chapter[index];
 
                 return VerseItem(title: title, content: content);
@@ -159,9 +125,9 @@ class _BookPageState extends State<BookPage> {
           separatorBuilder: (context, index) => const SizedBox(width: 10),
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          itemCount: book.chapters.length,
+          itemCount: _book.chapters.length,
           itemBuilder: (context, index) {
-            if (index == currentPage) {
+            if (index == _currentPage) {
               return GestureDetector(
                 onTap: () {
                   _pageController.jumpToPage(index);
