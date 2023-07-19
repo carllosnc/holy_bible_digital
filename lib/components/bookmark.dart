@@ -25,7 +25,7 @@ class Bookmark extends StatelessWidget {
         final Book book = bibleService.bible.books[bookIndex];
 
         return Container(
-          height: 45,
+          height: 55,
           color: Theme.of(context).colorScheme.primary,
           child: Center(
             child: Padding(
