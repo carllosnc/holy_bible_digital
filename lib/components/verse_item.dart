@@ -31,7 +31,7 @@ class VerseItem extends StatelessWidget {
           Text(
             content,
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 17,
             ),
           ),
         ],
