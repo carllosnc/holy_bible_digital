@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             height: 1,
           ),
         ),
-        title: const Text('Biblia Sagrada', style: TextStyle(fontSize: 18)),
+        title: const Text('Bíblia Sagrada', style: TextStyle(fontSize: 18)),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings_outlined),
