@@ -44,12 +44,6 @@ class _HomePageState extends State<HomePage> {
               context.push('/settings');
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.clear),
-            onPressed: () {
-              SharedPrefs().prefs.clear();
-            },
-          ),
         ],
       ),
       body: const ListOfBooks(),
