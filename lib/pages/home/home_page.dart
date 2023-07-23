@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '/components/components.dart';
+import '/core/core.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,8 +11,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool firstTime = SharedPrefs().prefs.getBool('welcome') ?? true;
+
   @override
   Widget build(BuildContext context) {
+    if (firstTime) {
+      return Welcome(
+        onPressed: () {
+          setState(() {
+            firstTime = false;
+          });
+        },
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -29,6 +42,12 @@ class _HomePageState extends State<HomePage> {
             icon: const Icon(Icons.settings_outlined),
             onPressed: () {
               context.push('/settings');
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.clear),
+            onPressed: () {
+              SharedPrefs().prefs.clear();
             },
           ),
         ],

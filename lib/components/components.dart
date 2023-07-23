@@ -3,3 +3,4 @@ export 'verse_item.dart';
 export 'bookmark.dart';
 export 'pin.dart';
 export 'arrow.dart';
+export 'welcome.dart';

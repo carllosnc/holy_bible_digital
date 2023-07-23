@@ -8,7 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   //load preferences
-  await loadPreferences();
+  await SharedPrefs().loadPreferences();
 
   //load bible
   final BibleRepository bibleRepository = BibleRepository();
