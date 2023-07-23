@@ -39,10 +39,6 @@ class ListOfBooks extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
             ),
           ),
-          leading: Text(
-            "${index + 1}",
-            style: const TextStyle(fontSize: 15),
-          ),
           trailing: const Icon(Icons.chevron_right_outlined),
           subtitle: Text(
             '${testament(index)} · ${book.chapters.length} capítulos',
