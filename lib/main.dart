@@ -10,6 +10,9 @@ void main() async {
   //load preferences
   await SharedPrefs().loadPreferences();
 
+  //load shorebird
+  await ShoreBird().loadShoreBird();
+
   //load bible
   final BibleRepository bibleRepository = BibleRepository();
   final Bible bible = await bibleRepository.readBibleJson();

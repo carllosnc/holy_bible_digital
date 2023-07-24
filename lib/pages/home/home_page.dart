@@ -36,7 +36,17 @@ class _HomePageState extends State<HomePage> {
             height: 1,
           ),
         ),
-        title: const Text('Bíblia Sagrada', style: TextStyle(fontSize: 18)),
+        title: const Wrap(
+          spacing: 10,
+          crossAxisAlignment: WrapCrossAlignment.end,
+          children: [
+            Text(
+              "Bíblia Sagrada",
+              style: TextStyle(fontSize: 18),
+            ),
+            AppVersion()
+          ],
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings_outlined),

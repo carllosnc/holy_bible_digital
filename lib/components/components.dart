@@ -4,3 +4,4 @@ export 'bookmark.dart';
 export 'pin.dart';
 export 'arrow.dart';
 export 'welcome.dart';
+export 'app_version.dart';
