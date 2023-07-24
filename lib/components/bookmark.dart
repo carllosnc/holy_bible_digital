@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/core/helpers/formaters.dart';
-import 'package:flutter_starter/notifiers/bookmark_notifier.dart';
+import '/notifiers/notifiers.dart';
 import 'package:go_router/go_router.dart';
 import '/data/data.dart';
 import '/domain/domain.dart';
+import '/core/core.dart';
 
 class Bookmark extends StatelessWidget {
   const Bookmark({super.key});

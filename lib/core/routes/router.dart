@@ -1,5 +1,5 @@
-import 'package:flutter_starter/domain/domain.dart';
 import 'package:go_router/go_router.dart';
+import '/domain/domain.dart';
 import '/pages/pages.dart';
 
 final router = GoRouter(

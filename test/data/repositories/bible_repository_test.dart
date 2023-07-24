@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/data/data.dart';
-import 'package:flutter_starter/domain/domain.dart';
+import 'package:holy_bible_digital/data/data.dart';
+import 'package:holy_bible_digital/domain/domain.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

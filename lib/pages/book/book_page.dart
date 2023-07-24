@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/core/helpers/formaters.dart';
+import 'package:holy_bible_digital/core/helpers/formaters.dart';
 import '/domain/domain.dart';
 import '/components/components.dart';
 import '/data/data.dart';
