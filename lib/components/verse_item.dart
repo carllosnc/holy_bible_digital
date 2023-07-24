@@ -23,7 +23,7 @@ class VerseItem extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: 11,
+              fontSize: 12,
               fontWeight: FontWeight.w500,
               color: Theme.of(context).colorScheme.primary,
             ),
