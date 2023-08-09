@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:holy_bible_digital/core/core.dart';
 import '/data/data.dart';
 import '/domain/domain.dart';
 
 class ListOfBooks extends StatelessWidget {
-  const ListOfBooks({super.key});
+  final String searchKey;
+
+  const ListOfBooks({
+    super.key,
+    this.searchKey = '',
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,18 +24,26 @@ class ListOfBooks extends StatelessWidget {
       }
     }
 
-    return ListView.builder(
-      itemCount: bibleService.bible.books.length,
-      itemBuilder: (context, index) {
-        Book book = bibleService.bible.books[index];
+    // filter books by searchKey
+    var books = bibleService.bible.books
+        .where((book) =>
+            book.name.toLowerCase().removeDiacritics().contains(searchKey))
+        .toList();
 
-        var extras = {
-          'book': index,
-          'chapter': 0,
-        };
+    return ListView.builder(
+      itemCount: books.length,
+      itemBuilder: (context, index) {
+        Book book = books[index];
 
         return ListTile(
           onTap: () {
+            index = bibleService.bible.books.indexOf(book);
+
+            var extras = {
+              'book': index,
+              'chapter': 0,
+            };
+
             context.push('/book', extra: extras);
           },
           title: Text(
