@@ -17,7 +17,14 @@ class SharedPrefs {
     //get from shared preferences
     final bool? lightTheme = prefs.getBool('lightTheme');
     final bool? welcome = prefs.getBool('welcome');
+    final String? bookmarkPin = prefs.getString('bookmark_pin');
 
+    // set bookmark pin to the bookmark notifier
+    if (bookmarkPin != null) {
+      BookmarkNotifier().setPin(bookmarkPin);
+    }
+
+    // set welcome to the welcome notifier
     if (welcome == null) {
       prefs.setBool('welcome', true);
     }

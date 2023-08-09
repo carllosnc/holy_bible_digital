@@ -12,9 +12,9 @@ class ListOfBooks extends StatelessWidget {
 
     String testament(int index) {
       if (index < 39) {
-        return 'VT';
+        return 'Velho testamento';
       } else {
-        return 'NT';
+        return 'Novo testamento';
       }
     }
 
@@ -41,7 +41,7 @@ class ListOfBooks extends StatelessWidget {
           ),
           trailing: const Icon(Icons.chevron_right_outlined),
           subtitle: Text(
-            '${testament(index)} · ${book.chapters.length} capítulos',
+            '${book.chapters.length} Capítulos · ${testament(index)}',
           ),
         );
       },

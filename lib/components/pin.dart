@@ -27,7 +27,7 @@ class _PinState extends State<Pin> {
     }
   }
 
-  void pinChangeHandle(BuildContext context) async {
+  void pinAction(BuildContext context) async {
     setState(() {
       pinned = true;
     });
@@ -55,7 +55,7 @@ class _PinState extends State<Pin> {
           ? Theme.of(context).colorScheme.primary
           : Theme.of(context).colorScheme.background,
       child: IconButton(
-        onPressed: () => pinChangeHandle(context),
+        onPressed: () => pinAction(context),
         icon: Icon(
           Icons.push_pin_outlined,
           color: pinned
