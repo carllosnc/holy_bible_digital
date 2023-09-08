@@ -79,8 +79,11 @@ class _VersePageState extends State<VersePage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                          ),
                           const Icon(
-                            Icons.format_quote,
+                            Icons.format_quote_outlined,
                             color: Colors.white,
                             size: 35,
                           ),
@@ -97,6 +100,7 @@ class _VersePageState extends State<VersePage> {
                             style: const TextStyle(
                               fontSize: 14,
                               color: Colors.white,
+                              fontStyle: FontStyle.italic,
                             ),
                           ),
                         ],
