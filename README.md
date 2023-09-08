@@ -43,11 +43,3 @@ dart run flutter_native_splash:create
 ---
 
 Carlos Costa @ 2023
-
-
-
----
-
-### License
-
-MIT © [Carlos Costa](https://github.com/C4co)
