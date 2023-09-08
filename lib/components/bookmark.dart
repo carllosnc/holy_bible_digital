@@ -1,9 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import '/notifiers/notifiers.dart';
-import '/data/data.dart';
-import '/domain/domain.dart';
-import '/core/core.dart';
+import '/imports/app.dart';
 
 class Bookmark extends StatelessWidget {
   const Bookmark({super.key});

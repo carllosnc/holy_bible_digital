@@ -1,10 +1,11 @@
+import 'dart:ui' as ui;
 import 'dart:typed_data';
+
+import 'package:share_plus/share_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import '/domain/domain.dart';
-import '/core/core.dart';
-import 'dart:ui' as ui;
-import 'package:share_plus/share_plus.dart';
+
+import '/imports/app.dart';
 
 class VersePage extends StatefulWidget {
   final Verse verse;

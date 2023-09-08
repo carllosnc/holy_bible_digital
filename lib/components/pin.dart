@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/notifiers/notifiers.dart';
+import '/imports/app.dart';
 
 class Pin extends StatefulWidget {
   final int book;
