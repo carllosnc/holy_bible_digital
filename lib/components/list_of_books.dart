@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:holy_bible_digital/core/core.dart';
-import '/data/data.dart';
-import '/domain/domain.dart';
+import '/imports/app.dart';
 
 class ListOfBooks extends StatelessWidget {
   final String searchKey;

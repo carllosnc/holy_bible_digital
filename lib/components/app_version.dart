@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/core/core.dart';
+import '/imports/app.dart';
 
 class AppVersion extends StatelessWidget {
   const AppVersion({super.key});
