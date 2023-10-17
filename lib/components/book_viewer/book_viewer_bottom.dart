@@ -1,7 +1,22 @@
-part of './book_viewer.dart';
+import 'package:flutter/material.dart';
+import '/imports/app.dart';
 
-extension BookViewerBottom on BookViewerState {
-  Container bookViewerBottom(BuildContext context) {
+class BookViewerBottom extends StatelessWidget {
+  final PageController pageController;
+  final ScrollController scrollController;
+  final int currentPage;
+  final Book book;
+
+  const BookViewerBottom({
+    super.key,
+    required this.pageController,
+    required this.scrollController,
+    required this.currentPage,
+    required this.book,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -13,17 +28,17 @@ extension BookViewerBottom on BookViewerState {
       ),
       height: 70,
       child: ListView.separated(
-        controller: _scrollController,
+        controller: scrollController,
         shrinkWrap: true,
         separatorBuilder: (context, index) => const SizedBox(width: 10),
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        itemCount: _book.chapters.length,
+        itemCount: book.chapters.length,
         itemBuilder: (context, index) {
-          if (index == _currentPage) {
+          if (index == currentPage) {
             return GestureDetector(
               onTap: () {
-                _pageController.jumpToPage(index);
+                pageController.jumpToPage(index);
               },
               child: Container(
                 width: 50,
@@ -47,7 +62,7 @@ extension BookViewerBottom on BookViewerState {
 
           return GestureDetector(
             onTap: () {
-              _pageController.animateToPage(
+              pageController.animateToPage(
                 index,
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.ease,

@@ -1,22 +1,44 @@
-part of './book_viewer.dart';
+import 'package:flutter/material.dart';
+import '/imports/app.dart';
 
-extension BookViewerContent on BookViewerState {
-  PageView bookViewerContent() {
+typedef PageChangeHandle = void Function(int index);
+typedef ScrollNotificationHandle = bool Function(Notification notification);
+
+class BookViewerContent extends StatelessWidget {
+  final PageController pageController;
+  final ScrollController verseScrollController;
+  final ScrollNotificationHandle onScrollNotification;
+  final PageChangeHandle onPageChange;
+  final int currentPage;
+  final Book book;
+
+  const BookViewerContent({
+    super.key,
+    required this.pageController,
+    required this.verseScrollController,
+    required this.onScrollNotification,
+    required this.onPageChange,
+    required this.currentPage,
+    required this.book,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return PageView(
-      onPageChanged: pageChangeHandle,
-      controller: _pageController,
+      onPageChanged: onPageChange,
+      controller: pageController,
       children: [
-        for (final chapter in _book.chapters)
+        for (final chapter in book.chapters)
           NotificationListener(
-            onNotification: calculateScrollIndicator,
+            onNotification: onScrollNotification,
             child: ListView.separated(
-              controller: _verseScrollController,
+              controller: verseScrollController,
               separatorBuilder: (context, index) => const SizedBox(height: 5),
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               itemCount: chapter.length,
               itemBuilder: (context, index) {
                 String title =
-                    "${_book.name} - Cap. ${_currentPage + 1} / Ver. ${index + 1}";
+                    "${book.name} - Cap. ${currentPage + 1} / Ver. ${index + 1}";
                 String content = chapter[index];
 
                 return VerseItem(title: title, content: content);

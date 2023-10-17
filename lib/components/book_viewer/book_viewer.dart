@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import '/imports/app.dart';
-
-part './book_viewer_header.dart';
-part './book_viewer_content.dart';
-part './book_viewer_bottom.dart';
+import './book_viewer_bottom.dart';
+import './book_viewer_content.dart';
 
 class BookViewer extends StatefulWidget {
   final int book;
@@ -62,7 +60,7 @@ class BookViewerState extends State<BookViewer> {
     );
   }
 
-  bool calculateScrollIndicator(notification) {
+  bool calculateScrollIndicatorHandle(notification) {
     num total = _verseScrollController.positions.last.maxScrollExtent;
 
     if (total > 0) {
@@ -85,9 +83,62 @@ class BookViewerState extends State<BookViewer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: bookViewerHeader(context),
-      body: bookViewerContent(),
-      bottomNavigationBar: bookViewerBottom(context),
+      appBar: AppBar(
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                color: Colors.transparent,
+                height: 0,
+              ),
+              Container(
+                width: schollIndicator.toDouble(),
+                color: Theme.of(context).colorScheme.primary,
+                height: 4,
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          Pin(
+            key: UniqueKey(),
+            book: widget.book,
+            chapter: _currentPage,
+          ),
+          Arrow(
+            key: UniqueKey(),
+            type: ArrowType.previous,
+            pageController: _pageController,
+            currentPage: _currentPage,
+          ),
+          Arrow(
+            key: UniqueKey(),
+            type: ArrowType.next,
+            pageController: _pageController,
+            currentPage: _currentPage,
+          ),
+        ],
+        title: Text(
+          "${_book.name.adaptName()} - Cap: ${_currentPage + 1}",
+          style: const TextStyle(fontSize: 16),
+        ),
+      ),
+      body: BookViewerContent(
+        pageController: _pageController,
+        verseScrollController: _verseScrollController,
+        onScrollNotification: calculateScrollIndicatorHandle,
+        onPageChange: pageChangeHandle,
+        currentPage: _currentPage,
+        book: _book,
+      ),
+      bottomNavigationBar: BookViewerBottom(
+        pageController: _pageController,
+        scrollController: _scrollController,
+        currentPage: _currentPage,
+        book: _book,
+      ),
     );
   }
 }

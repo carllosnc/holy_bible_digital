@@ -75,13 +75,6 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
         surfaceTintColor: Theme.of(context).colorScheme.background,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-            height: 1,
-          ),
-        ),
         title: showSearch ? searchField() : appTitle(),
         actions: [
           IconButton(
