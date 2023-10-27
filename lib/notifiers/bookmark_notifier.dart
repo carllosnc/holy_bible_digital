@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class BookmarkNotifier {
-  static final BookmarkNotifier _themeNotifier = BookmarkNotifier._internal();
-
-  factory BookmarkNotifier() {
-    return _themeNotifier;
-  }
-
-  BookmarkNotifier._internal();
-
+class _BookmarkNotifier {
   ValueNotifier<String?> pin = ValueNotifier<String?>(null);
 
   setPin(String value) async {
@@ -19,3 +11,5 @@ class BookmarkNotifier {
     prefs.setString('bookmark_pin', value);
   }
 }
+
+var bookmarkNotifier = _BookmarkNotifier();

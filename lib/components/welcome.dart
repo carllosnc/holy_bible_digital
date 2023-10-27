@@ -57,7 +57,7 @@ class Welcome extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         child: FilledButton(
           onPressed: () {
-            SharedPrefs().prefs.setBool('welcome', false);
+            sharedPrefs.prefs.setBool('welcome', false);
 
             onPressed();
           },

@@ -8,7 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   //load preferences
-  await SharedPrefs().loadPreferences();
+  await sharedPrefs.loadPreferences();
 
   //load shorebird
   await ShoreBird().loadShoreBird();

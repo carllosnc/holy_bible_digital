@@ -11,14 +11,6 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   bool _lightTheme = true;
 
-  final ThemeNotifier _themeNotifier = ThemeNotifier();
-
-  @override
-  void initState() {
-    super.initState();
-    _lightTheme = _themeNotifier.lightTheme.value;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +33,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               onChanged: (bool value) {
                 setState(() {
-                  _themeNotifier.setLightTheme(value);
+                  themeNotifier.setLightTheme(value);
                   _lightTheme = value;
                 });
               },

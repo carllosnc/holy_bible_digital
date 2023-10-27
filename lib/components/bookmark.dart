@@ -10,7 +10,7 @@ class Bookmark extends StatelessWidget {
     final BibleService bibleService = BibleService();
 
     return ValueListenableBuilder(
-      valueListenable: BookmarkNotifier().pin,
+      valueListenable: bookmarkNotifier.pin,
       builder: (context, value, child) {
         if (value == null) {
           return const SizedBox.shrink();

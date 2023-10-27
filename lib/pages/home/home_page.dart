@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool firstTime = SharedPrefs().prefs.getBool('welcome') ?? true;
+  bool firstTime = sharedPrefs.prefs.getBool('welcome') ?? true;
   String searchKey = '';
   bool showSearch = false;
 

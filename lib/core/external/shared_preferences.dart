@@ -1,15 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import '/notifiers/notifiers.dart';
 
-class SharedPrefs {
-  static final SharedPrefs _sharedPrefs = SharedPrefs._internal();
+class _SharedPrefs {
   late final SharedPreferences prefs;
-
-  factory SharedPrefs() {
-    return _sharedPrefs;
-  }
-
-  SharedPrefs._internal();
 
   loadPreferences() async {
     prefs = await SharedPreferences.getInstance();
@@ -21,7 +14,7 @@ class SharedPrefs {
 
     // set bookmark pin to the bookmark notifier
     if (bookmarkPin != null) {
-      BookmarkNotifier().setPin(bookmarkPin);
+      bookmarkNotifier.setPin(bookmarkPin);
     }
 
     // set welcome to the welcome notifier
@@ -31,7 +24,9 @@ class SharedPrefs {
 
     // set theme to the theme notifier
     if (lightTheme != null) {
-      ThemeNotifier().lightTheme.value = lightTheme;
+      themeNotifier.lightTheme.value = lightTheme;
     }
   }
 }
+
+var sharedPrefs = _SharedPrefs();

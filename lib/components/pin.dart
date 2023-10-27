@@ -22,7 +22,7 @@ class _PinState extends State<Pin> {
   void initState() {
     super.initState();
 
-    if (BookmarkNotifier().pin.value == "${widget.book}-${widget.chapter}") {
+    if (bookmarkNotifier.pin.value == "${widget.book}-${widget.chapter}") {
       pinned = true;
     }
   }
@@ -32,7 +32,7 @@ class _PinState extends State<Pin> {
       pinned = true;
     });
 
-    BookmarkNotifier().setPin("${widget.book}-${widget.chapter}");
+    bookmarkNotifier.setPin("${widget.book}-${widget.chapter}");
 
     //show snackbar
     ScaffoldMessenger.of(context).showSnackBar(
