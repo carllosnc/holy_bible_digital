@@ -9,7 +9,20 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool _lightTheme = true;
+  late bool _lightTheme;
+
+  @override
+  void initState() {
+    super.initState();
+    _lightTheme = themeNotifier.lightTheme.value;
+  }
+
+  void changeThemeHandle(bool value) {
+    setState(() {
+      themeNotifier.setLightTheme(value);
+      _lightTheme = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +44,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       : Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
-              onChanged: (bool value) {
-                setState(() {
-                  themeNotifier.setLightTheme(value);
-                  _lightTheme = value;
-                });
-              },
+              onChanged: changeThemeHandle,
             ),
           ),
           const Divider(height: 1)
