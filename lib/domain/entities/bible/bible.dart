@@ -6,8 +6,12 @@ part 'bible.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Bible {
   List<Book> books;
+  String lang;
 
-  Bible({required this.books});
+  Bible({
+    required this.books,
+    required this.lang,
+  });
 
   factory Bible.fromJson(Map<String, dynamic> json) => _$BibleFromJson(json);
 

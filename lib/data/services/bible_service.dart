@@ -9,5 +9,5 @@ class BibleService {
 
   BibleService._internal();
 
-  Bible bible = Bible(books: []);
+  Bible bible = Bible(books: [], lang: "PT-br");
 }

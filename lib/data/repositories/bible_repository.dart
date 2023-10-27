@@ -4,17 +4,11 @@ import '/domain/domain.dart';
 
 class BibleRepository {
   Future<Bible> readBibleJson() async {
-    final input = await rootBundle.loadString('./assets/data/acf.json');
+    final input = await rootBundle.loadString('./assets/data/bible_pt-br.json');
 
     final bibleJson = json.decode(input);
 
-    List<Book> bibleBooks = [];
-
-    for (var book in bibleJson) {
-      bibleBooks.add(Book.fromJson(book));
-    }
-
-    final bible = Bible(books: bibleBooks);
+    final bible = Bible.fromJson(bibleJson);
 
     return bible;
   }
