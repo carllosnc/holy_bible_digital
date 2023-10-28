@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:holy_bible_digital/notifiers/bible_notifier.dart';
 import '/imports/app.dart';
+import '/core/extensions/string_extensions.dart';
 
 class ListOfBooks extends StatelessWidget {
   final String searchKey;
@@ -10,51 +12,62 @@ class ListOfBooks extends StatelessWidget {
     this.searchKey = '',
   });
 
+  String testament({
+    required int index,
+    required String lang,
+  }) {
+    if (index < 39) {
+      return labels(lang)["old testament"];
+    } else {
+      return labels(lang)["new testament"];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final BibleService bibleService = BibleService();
+    return ValueListenableBuilder(
+      valueListenable: bibleNotifier.currentBible,
+      builder: (context, Bible bible, child) {
+        var books = bible.books
+            .where((book) =>
+                book.name.toLowerCase().removeDiacritics().contains(searchKey))
+            .toList();
 
-    String testament(int index) {
-      if (index < 39) {
-        return 'Velho testamento';
-      } else {
-        return 'Novo testamento';
-      }
-    }
+        return ListView.builder(
+          itemCount: books.length,
+          itemBuilder: (context, index) {
+            Book book = books[index];
+            String chapter = labels(bible.lang)["chapter"]
+                .toString()
+                .pluralize(book.chapters.length);
 
-    // filter books by searchKey
-    var books = bibleService.bible.books
-        .where((book) =>
-            book.name.toLowerCase().removeDiacritics().contains(searchKey))
-        .toList();
+            return ListTile(
+              onTap: () {
+                index = bible.books.indexOf(book);
 
-    return ListView.builder(
-      itemCount: books.length,
-      itemBuilder: (context, index) {
-        Book book = books[index];
+                var extras = {
+                  'book': index,
+                  'chapter': 0,
+                };
 
-        return ListTile(
-          onTap: () {
-            index = bibleService.bible.books.indexOf(book);
-
-            var extras = {
-              'book': index,
-              'chapter': 0,
-            };
-
-            context.push('/book', extra: extras);
+                context.push('/book', extra: extras);
+              },
+              title: Text(
+                book.name,
+                style: TextStyle(
+                  fontSize: 17,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              trailing: const Icon(Icons.chevron_right_outlined),
+              subtitle: Text(
+                '${book.chapters.length} $chapter · ${testament(
+                  index: index,
+                  lang: bible.lang,
+                )}',
+              ),
+            );
           },
-          title: Text(
-            book.name,
-            style: TextStyle(
-              fontSize: 17,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          ),
-          trailing: const Icon(Icons.chevron_right_outlined),
-          subtitle: Text(
-            '${book.chapters.length} Capítulos · ${testament(index)}',
-          ),
         );
       },
     );

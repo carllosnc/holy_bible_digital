@@ -11,10 +11,5 @@ void main() async {
   //load shorebird
   await ShoreBird().loadShoreBird();
 
-  //load bible
-  final BibleRepository bibleRepository = BibleRepository();
-  final Bible bible = await bibleRepository.readBibleJson();
-  BibleService().bible = bible;
-
   runApp(const App());
 }

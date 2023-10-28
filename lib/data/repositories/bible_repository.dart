@@ -1,15 +1,19 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/services.dart' show rootBundle;
 import '/domain/domain.dart';
 
-class BibleRepository {
-  Future<Bible> readBibleJson() async {
-    final input = await rootBundle.loadString('./assets/data/bible_pt-br.json');
+Future<Bible> readBibleJson(String lang) async {
+  // read gzipped file
+  final input = await rootBundle.load('assets/data/bible_$lang.gz');
 
-    final bibleJson = json.decode(input);
+  // convert to bytes and decode
+  final bytes = GZipCodec().decoder.convert(input.buffer.asUint8List());
 
-    final bible = Bible.fromJson(bibleJson);
+  // convert to json and decode
+  final jsonDecoded = json.decode(utf8.decode(bytes));
 
-    return bible;
-  }
+  Bible bible = Bible.fromJson(jsonDecoded);
+
+  return bible;
 }

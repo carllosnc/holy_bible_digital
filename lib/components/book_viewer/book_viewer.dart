@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holy_bible_digital/notifiers/bible_notifier.dart';
 import '/imports/app.dart';
 import './book_viewer_bottom.dart';
 import './book_viewer_content.dart';
@@ -21,18 +22,15 @@ class BookViewerState extends State<BookViewer> {
   late PageController _pageController;
   late ScrollController _scrollController;
   late ScrollController _verseScrollController;
-  final BibleService _bibleService = BibleService();
-  late Book _book;
   late int _currentPage;
 
-  num schollIndicator = 0;
+  num _schollIndicator = 0;
 
   @override
   void initState() {
     super.initState();
 
     _currentPage = widget.chapter;
-    _book = _bibleService.bible.books[widget.book];
 
     _pageController = PageController(
       initialPage: _currentPage,
@@ -73,7 +71,7 @@ class BookViewerState extends State<BookViewer> {
       num scrollIndicator = withSize * percent;
 
       setState(() {
-        schollIndicator = scrollIndicator;
+        _schollIndicator = scrollIndicator;
       });
     }
 
@@ -82,63 +80,69 @@ class BookViewerState extends State<BookViewer> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                color: Colors.transparent,
-                height: 0,
+    return ValueListenableBuilder(
+        valueListenable: bibleNotifier.currentBible,
+        builder: (context, bible, child) {
+          Book book = bible.books[widget.book];
+
+          return Scaffold(
+            appBar: AppBar(
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(1),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      color: Colors.transparent,
+                      height: 0,
+                    ),
+                    Container(
+                      width: _schollIndicator.toDouble(),
+                      color: Theme.of(context).colorScheme.primary,
+                      height: 4,
+                    ),
+                  ],
+                ),
               ),
-              Container(
-                width: schollIndicator.toDouble(),
-                color: Theme.of(context).colorScheme.primary,
-                height: 4,
+              actions: [
+                Pin(
+                  key: UniqueKey(),
+                  book: widget.book,
+                  chapter: _currentPage,
+                ),
+                Arrow(
+                  key: UniqueKey(),
+                  type: ArrowType.previous,
+                  pageController: _pageController,
+                  currentPage: _currentPage,
+                ),
+                Arrow(
+                  key: UniqueKey(),
+                  type: ArrowType.next,
+                  pageController: _pageController,
+                  currentPage: _currentPage,
+                ),
+              ],
+              title: Text(
+                "${book.name.adaptName()} - Cap: ${_currentPage + 1}",
+                style: const TextStyle(fontSize: 16),
               ),
-            ],
-          ),
-        ),
-        actions: [
-          Pin(
-            key: UniqueKey(),
-            book: widget.book,
-            chapter: _currentPage,
-          ),
-          Arrow(
-            key: UniqueKey(),
-            type: ArrowType.previous,
-            pageController: _pageController,
-            currentPage: _currentPage,
-          ),
-          Arrow(
-            key: UniqueKey(),
-            type: ArrowType.next,
-            pageController: _pageController,
-            currentPage: _currentPage,
-          ),
-        ],
-        title: Text(
-          "${_book.name.adaptName()} - Cap: ${_currentPage + 1}",
-          style: const TextStyle(fontSize: 16),
-        ),
-      ),
-      body: BookViewerContent(
-        pageController: _pageController,
-        verseScrollController: _verseScrollController,
-        onScrollNotification: calculateScrollIndicatorHandle,
-        onPageChange: pageChangeHandle,
-        currentPage: _currentPage,
-        book: _book,
-      ),
-      bottomNavigationBar: BookViewerBottom(
-        pageController: _pageController,
-        scrollController: _scrollController,
-        currentPage: _currentPage,
-        book: _book,
-      ),
-    );
+            ),
+            body: BookViewerContent(
+              pageController: _pageController,
+              verseScrollController: _verseScrollController,
+              onScrollNotification: calculateScrollIndicatorHandle,
+              onPageChange: pageChangeHandle,
+              currentPage: _currentPage,
+              book: book,
+            ),
+            bottomNavigationBar: BookViewerBottom(
+              pageController: _pageController,
+              scrollController: _scrollController,
+              currentPage: _currentPage,
+              book: book,
+            ),
+          );
+        });
   }
 }

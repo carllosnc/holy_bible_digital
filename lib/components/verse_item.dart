@@ -6,14 +6,19 @@ class VerseItem extends StatelessWidget {
   final String title;
   final String content;
 
-  const VerseItem({super.key, required this.title, required this.content});
+  const VerseItem({
+    super.key,
+    required this.title,
+    required this.content,
+  });
 
   @override
   Widget build(BuildContext context) {
+    String formatedContent = content.replaceAll("&#x27;", "'");
+
     return ListTile(
       onTap: () {
-        Verse verse = Verse(title: title, content: content);
-
+        Verse verse = Verse(title: title, content: formatedContent);
         context.push('/verse', extra: verse);
       },
       contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -29,7 +34,7 @@ class VerseItem extends StatelessWidget {
             ),
           ),
           Text(
-            content,
+            formatedContent,
             style: const TextStyle(
               fontSize: 17,
             ),

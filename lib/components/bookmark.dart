@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '/imports/app.dart';
 
 class Bookmark extends StatelessWidget {
-  const Bookmark({super.key});
+  final Bible bible;
+
+  const Bookmark({super.key, required this.bible});
 
   @override
   Widget build(BuildContext context) {
-    final BibleService bibleService = BibleService();
-
     return ValueListenableBuilder(
       valueListenable: bookmarkNotifier.pin,
       builder: (context, value, child) {
@@ -19,7 +19,7 @@ class Bookmark extends StatelessWidget {
         int bookIndex = int.parse(value.split('-')[0]);
         int chapterIndex = int.parse(value.split('-')[1]);
 
-        final Book book = bibleService.bible.books[bookIndex];
+        final Book book = bible.books[bookIndex];
 
         return Container(
           height: 55,
@@ -63,9 +63,7 @@ class Bookmark extends StatelessWidget {
                         };
                         context.go('/book', extra: extras);
                       },
-                      child: const Text(
-                        'Continuar',
-                      ),
+                      child: Text(labels(bible.lang)['continue']),
                     ),
                   ),
                 ],
