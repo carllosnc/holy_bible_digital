@@ -27,14 +27,7 @@ class _PinState extends State<Pin> {
     }
   }
 
-  void pinAction(BuildContext context) async {
-    setState(() {
-      pinned = true;
-    });
-
-    bookmarkNotifier.setPin("${widget.book}-${widget.chapter}");
-
-    //show snackbar
+  showPinMessage(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: const Center(
@@ -46,6 +39,27 @@ class _PinState extends State<Pin> {
         duration: const Duration(seconds: 1),
       ),
     );
+  }
+
+  void pinAction(BuildContext context) async {
+    var bookChapter = "${widget.book}-${widget.chapter}";
+    var currentPin = bookmarkNotifier.pin.value;
+
+    if (currentPin == bookChapter) {
+      setState(() {
+        pinned = false;
+      });
+
+      bookmarkNotifier.setPin(null);
+      return;
+    }
+
+    setState(() {
+      pinned = true;
+    });
+
+    showPinMessage(context);
+    bookmarkNotifier.setPin(bookChapter);
   }
 
   @override
