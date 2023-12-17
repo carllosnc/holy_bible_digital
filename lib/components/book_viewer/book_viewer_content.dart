@@ -34,11 +34,10 @@ class BookViewerContent extends StatelessWidget {
             child: ListView.separated(
               controller: verseScrollController,
               separatorBuilder: (context, index) => const SizedBox(height: 5),
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              padding: const EdgeInsets.symmetric(vertical: 5),
               itemCount: chapter.length,
               itemBuilder: (context, index) {
-                String title =
-                    "${book.name} - Cap. ${currentPage + 1} / Ver. ${index + 1}";
+                String title = "${book.name} - Cap. ${currentPage + 1} / Ver. ${index + 1}";
                 String content = chapter[index];
 
                 return VerseItem(title: title, content: content);
