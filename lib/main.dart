@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '/imports/app.dart';
 import './app.dart';
 
@@ -10,6 +11,15 @@ void main() async {
 
   //load shorebird
   await ShoreBird().loadShoreBird();
+
+  //lock screen to landscape
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  //specific platform
+  await windowsPlatform();
 
   runApp(const App());
 }
