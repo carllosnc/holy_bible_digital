@@ -23,13 +23,11 @@ class _VersePageState extends State<VersePage> {
   final GlobalKey _globalKey = GlobalKey();
 
   Future<Uint8List> captureWidget() async {
-    final RenderRepaintBoundary boundary =
-        _globalKey.currentContext?.findRenderObject() as RenderRepaintBoundary;
+    final RenderRepaintBoundary boundary = _globalKey.currentContext?.findRenderObject() as RenderRepaintBoundary;
 
     final ui.Image image = await boundary.toImage(pixelRatio: 2.0);
 
-    final ByteData? byteData =
-        await image.toByteData(format: ui.ImageByteFormat.png);
+    final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
 
     final Uint8List pngBytes = byteData!.buffer.asUint8List();
 
@@ -40,6 +38,7 @@ class _VersePageState extends State<VersePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Theme.of(context).colorScheme.background,
         title: Text(
           widget.verse.title,
           style: const TextStyle(fontSize: 16),
@@ -61,64 +60,66 @@ class _VersePageState extends State<VersePage> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            RepaintBoundary(
-              key: _globalKey,
-              child: Stack(
-                children: [
-                  Container(
-                    constraints: BoxConstraints(
-                      minHeight: MediaQuery.of(context).size.width - 30,
-                    ),
-                    padding: const EdgeInsets.fromLTRB(30, 60, 30, 30),
-                    color: Colors.black,
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                          const Icon(
-                            Icons.format_quote_outlined,
-                            color: Colors.white,
-                            size: 35,
-                          ),
-                          Text(
-                            widget.verse.content,
-                            style: const TextStyle(
-                              fontSize: 17,
-                              color: Colors.white,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              RepaintBoundary(
+                key: _globalKey,
+                child: Stack(
+                  children: [
+                    Container(
+                      constraints: BoxConstraints(
+                        minHeight: MediaQuery.of(context).size.width - 30,
+                      ),
+                      padding: const EdgeInsets.fromLTRB(30, 60, 30, 30),
+                      color: Colors.black,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width,
                             ),
-                          ),
-                          const SizedBox(height: 30),
-                          Text(
-                            widget.verse.title,
-                            style: const TextStyle(
-                              fontSize: 14,
+                            const Icon(
+                              Icons.format_quote_outlined,
                               color: Colors.white,
-                              fontStyle: FontStyle.italic,
+                              size: 35,
                             ),
-                          ),
-                        ],
+                            Text(
+                              widget.verse.content,
+                              style: const TextStyle(
+                                fontSize: 17,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(height: 30),
+                            Text(
+                              widget.verse.title,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    top: 20,
-                    right: 20,
-                    child: Image.asset(
-                      Assets.extendedDarkLogo,
-                      height: 28,
+                    Positioned(
+                      top: 20,
+                      right: 20,
+                      child: Image.asset(
+                        Assets.extendedDarkLogo,
+                        height: 28,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
