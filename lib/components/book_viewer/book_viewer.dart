@@ -37,7 +37,7 @@ class BookViewerState extends State<BookViewer> {
     );
 
     _scrollController = ScrollController(
-      initialScrollOffset: ((_currentPage * 60) - 170).toDouble(),
+      initialScrollOffset: ((_currentPage * 60)).toDouble(),
     );
 
     _verseScrollController = ScrollController();
@@ -46,13 +46,14 @@ class BookViewerState extends State<BookViewer> {
   // call this function when a page is changed
   void pageChangeHandle(index) {
     _verseScrollController = ScrollController();
+    double width = MediaQuery.of(context).size.width;
 
     setState(() {
       _currentPage = index;
     });
 
     _scrollController.animateTo(
-      ((_currentPage * 60) - 170).toDouble(),
+      ((_currentPage * 60) - ((width / 2) - 35)).toDouble(),
       duration: const Duration(milliseconds: 300),
       curve: Curves.ease,
     );
