@@ -28,15 +28,15 @@ class VerseItem extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
               color: Theme.of(context).colorScheme.primary,
             ),
           ),
           Text(
             formatedContent,
             style: const TextStyle(
-              fontSize: 17,
+              fontSize: 19,
             ),
           ),
         ],

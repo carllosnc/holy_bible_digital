@@ -28,18 +28,13 @@ class ListOfBooks extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: bibleNotifier.currentBible,
       builder: (context, Bible bible, child) {
-        var books = bible.books
-            .where((book) =>
-                book.name.toLowerCase().removeDiacritics().contains(searchKey))
-            .toList();
+        var books = bible.books.where((book) => book.name.toLowerCase().removeDiacritics().contains(searchKey)).toList();
 
         return ListView.builder(
           itemCount: books.length,
           itemBuilder: (context, index) {
             Book book = books[index];
-            String chapter = labels(bible.lang)["chapter"]
-                .toString()
-                .pluralize(book.chapters.length);
+            String chapter = labels(bible.lang)["chapter"].toString().pluralize(book.chapters.length);
 
             return ListTile(
               onTap: () {
@@ -55,12 +50,16 @@ class ListOfBooks extends StatelessWidget {
               title: Text(
                 book.name,
                 style: TextStyle(
-                  fontSize: 17,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
                   color: Theme.of(context).colorScheme.primary,
                 ),
               ),
               trailing: const Icon(Icons.chevron_right_outlined),
               subtitle: Text(
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
                 '${book.chapters.length} $chapter · ${testament(
                   index: index,
                   lang: bible.lang,

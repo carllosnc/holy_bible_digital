@@ -90,7 +90,7 @@ class _VersePageState extends State<VersePage> {
                             Text(
                               widget.verse.content,
                               style: const TextStyle(
-                                fontSize: 17,
+                                fontSize: 19,
                                 color: Colors.white,
                               ),
                             ),
@@ -98,7 +98,7 @@ class _VersePageState extends State<VersePage> {
                             Text(
                               widget.verse.title,
                               style: const TextStyle(
-                                fontSize: 14,
+                                fontSize: 15,
                                 color: Colors.white,
                                 fontStyle: FontStyle.italic,
                               ),
@@ -112,7 +112,7 @@ class _VersePageState extends State<VersePage> {
                       right: 20,
                       child: Image.asset(
                         Assets.extendedDarkLogo,
-                        height: 28,
+                        height: 32,
                       ),
                     ),
                   ],
