@@ -51,7 +51,7 @@ class ListOfBooks extends StatelessWidget {
                 book.name,
                 style: TextStyle(
                   fontSize: 20,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: Theme.of(context).colorScheme.primary,
                 ),
               ),
