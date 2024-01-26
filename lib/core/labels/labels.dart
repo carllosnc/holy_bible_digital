@@ -2,8 +2,8 @@ labels(String lang) {
   Map<String, Map<String, String>> content = {
     'en': {
       'chapter': 'Chapter',
-      'old testament': 'Old testament',
-      'new testament': 'New testament',
+      'old testament': 'old testament',
+      'new testament': 'new testament',
       'verse': 'Verse',
       'translates': 'Translates',
       'portuguese': 'Portuguese',
@@ -16,8 +16,8 @@ labels(String lang) {
     },
     'fr': {
       'chapter': 'Chapitre',
-      'old testament': 'Ancien testament',
-      'new testament': 'Nouveau testament',
+      'old testament': 'ancien testament',
+      'new testament': 'nouveau testament',
       'verse': 'Verset',
       'translates': 'Traductions',
       'portuguese': 'Portugais',
@@ -30,8 +30,8 @@ labels(String lang) {
     },
     'it': {
       'chapter': 'Capitolo',
-      'old testament': 'Vecchio testamento',
-      'new testament': 'Nuovo testamento',
+      'old testament': 'vecchio testamento',
+      'new testament': 'nuovo testamento',
       'verse': 'Versetto',
       'translates': 'Traduzioni',
       'portuguese': 'Portoghese',
@@ -44,8 +44,8 @@ labels(String lang) {
     },
     'es': {
       'chapter': 'Capítulo',
-      'old testament': 'Antiguo testamento',
-      'new testament': 'Nuevo testamento',
+      'old testament': 'antiguo testamento',
+      'new testament': 'nuevo testamento',
       'verse': 'Versículo',
       'translates': 'Traducciones',
       'portuguese': 'Portugués',
@@ -58,8 +58,8 @@ labels(String lang) {
     },
     'pt-br': {
       'chapter': 'Capítulo',
-      'old testament': 'Velho testamento',
-      'new testament': 'Novo testamento',
+      'old testament': 'velho testamento',
+      'new testament': 'novo testamento',
       'verse': 'Versículo',
       'translates': 'Traduções',
       'portuguese': 'Português',
