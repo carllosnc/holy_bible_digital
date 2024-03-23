@@ -100,8 +100,8 @@ class LanguageItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: currentLang == lang
-          ? Theme.of(context).colorScheme.secondaryContainer
+      color: currentLang == lang //
+          ? Theme.of(context).colorScheme.onSurface.withOpacity(0.1)
           : null,
       child: ListTile(
         leading: Image.asset(
@@ -116,7 +116,7 @@ class LanguageItem extends StatelessWidget {
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: Theme.of(context).colorScheme.primary,
+              backgroundColor: Theme.of(context).colorScheme.onSurface,
               content: Row(
                 children: [
                   Image.asset(
