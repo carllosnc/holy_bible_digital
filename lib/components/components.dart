@@ -7,3 +7,4 @@ export 'welcome.dart';
 export 'app_version.dart';
 export 'book_viewer/book_viewer.dart';
 export 'search_bar.dart';
+export 'translate_button.dart';
