@@ -5,6 +5,9 @@ appTheme({required bool isLight}) => ThemeData(
       brightness: isLight ? Brightness.light : Brightness.dark,
       colorSchemeSeed: const Color.fromARGB(255, 0, 26, 255),
       fontFamily: 'SFProDisplay',
+      bottomSheetTheme: const BottomSheetThemeData(
+        surfaceTintColor: Colors.transparent,
+      ),
       pageTransitionsTheme: const PageTransitionsTheme(
         builders: {
           TargetPlatform.android: CupertinoPageTransitionsBuilder(),
