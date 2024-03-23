@@ -23,8 +23,7 @@ class Bookmark extends StatelessWidget {
 
         return Container(
           height: 55,
-          color:
-              Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.7),
+          color: Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.7),
           child: Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -44,9 +43,7 @@ class Bookmark extends StatelessWidget {
                         Text(
                           '${book.name.adaptName()} - Cap. ${chapterIndex + 1}',
                           style: TextStyle(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSecondaryContainer,
+                            color: Theme.of(context).colorScheme.onSecondaryContainer,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -56,12 +53,17 @@ class Bookmark extends StatelessWidget {
                   SizedBox(
                     height: 30,
                     child: FilledButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
                       onPressed: () {
                         var extras = {
                           'book': bookIndex,
                           'chapter': chapterIndex,
                         };
-                        context.go('/book', extra: extras);
+                        context.go('$homePath/book', extra: extras);
                       },
                       child: Text(labels(bible.lang)['continue']),
                     ),
