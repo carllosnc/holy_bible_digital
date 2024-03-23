@@ -21,7 +21,7 @@ class BookViewerBottom extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
             width: 1,
           ),
         ),
@@ -45,14 +45,15 @@ class BookViewerBottom extends StatelessWidget {
                 height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(200),
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
                 child: Center(
                   child: Text(
                     "${index + 1}",
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
+                      color: Theme.of(context).colorScheme.surface,
                       fontSize: 14,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                 ),
@@ -74,7 +75,7 @@ class BookViewerBottom extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(200),
                 border: Border.all(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
                   width: 1,
                 ),
               ),
@@ -82,7 +83,7 @@ class BookViewerBottom extends StatelessWidget {
                 child: Text(
                   "${index + 1}",
                   style: const TextStyle(
-                    fontSize: 13,
+                    fontSize: 14,
                   ),
                 ),
               ),
