@@ -19,7 +19,7 @@ class VerseItem extends StatelessWidget {
     return ListTile(
       onTap: () {
         Verse verse = Verse(title: title, content: formatedContent);
-        context.push('/verse', extra: verse);
+        context.push('$homePath/verse', extra: verse);
       },
       contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       title: Column(
@@ -28,15 +28,16 @@ class VerseItem extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              color: Theme.of(context).colorScheme.primary,
+              fontSize: 14,
+              fontWeight: FontWeight.w800,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           Text(
             formatedContent,
-            style: const TextStyle(
-              fontSize: 19,
+            style: TextStyle(
+              fontSize: 20,
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
             ),
           ),
         ],
