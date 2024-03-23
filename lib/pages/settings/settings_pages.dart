@@ -38,8 +38,10 @@ class _SettingsPageState extends State<SettingsPage> {
               value: _lightTheme,
               thumbIcon: MaterialStateProperty.all(
                 Icon(
-                  _lightTheme ? Icons.light_mode : Icons.dark_mode,
-                  color: _lightTheme
+                  _lightTheme //
+                      ? Icons.light_mode
+                      : Icons.dark_mode,
+                  color: _lightTheme //
                       ? Theme.of(context).colorScheme.primary
                       : Theme.of(context).colorScheme.onPrimary,
                 ),
