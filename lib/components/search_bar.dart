@@ -21,17 +21,16 @@ class SearchBook extends StatelessWidget {
           onSearch(value);
         },
         decoration: InputDecoration(
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 0, horizontal: 25),
+          contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 25),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),
             borderSide: BorderSide.none,
           ),
           filled: true,
-          fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+          fillColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
           hintText: 'Pesquisar livro',
           hintStyle: TextStyle(
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
           ),
         ),
       ),
