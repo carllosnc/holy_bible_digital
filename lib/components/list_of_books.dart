@@ -28,7 +28,10 @@ class ListOfBooks extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: bibleNotifier.currentBible,
       builder: (context, Bible bible, child) {
-        var books = bible.books.where((book) => book.name.toLowerCase().removeDiacritics().contains(searchKey)).toList();
+        var books = bible //
+            .books
+            .where((book) => book.name.toLowerCase().removeDiacritics().contains(searchKey))
+            .toList();
 
         return ListView.builder(
           itemCount: books.length,
@@ -45,20 +48,20 @@ class ListOfBooks extends StatelessWidget {
                   'chapter': 0,
                 };
 
-                context.push('/book', extra: extras);
+                context.push('$homePath/book', extra: extras);
               },
               title: Text(
                 book.name,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  color: Theme.of(context).colorScheme.primary,
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               trailing: const Icon(Icons.chevron_right_outlined),
               subtitle: Text(
-                style: const TextStyle(
-                  fontSize: 16,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                  fontSize: 17,
                 ),
                 '${book.chapters.length} $chapter · ${testament(
                   index: index,
