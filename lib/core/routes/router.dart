@@ -1,11 +1,21 @@
 import 'package:go_router/go_router.dart';
-import '/domain/domain.dart';
-import '/pages/pages.dart';
+import '/imports/app.dart';
+
+bool firstTime = sharedPrefs.prefs.getBool('welcome') ?? true;
+
+String homePath = firstTime ? '/home' : '';
 
 final router = GoRouter(
   routes: [
+    if (firstTime)
+      GoRoute(
+        path: '/',
+        builder: (context, state) {
+          return const WelcomePage();
+        },
+      ),
     GoRoute(
-      path: '/',
+      path: firstTime ? '/home' : '/',
       builder: (context, state) => const HomePage(),
       routes: [
         GoRoute(
