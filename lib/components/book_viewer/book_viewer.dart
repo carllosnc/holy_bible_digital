@@ -99,7 +99,7 @@ class BookViewerState extends State<BookViewer> {
                     ),
                     Container(
                       width: _schollIndicator.toDouble(),
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.onSurface,
                       height: 4,
                     ),
                   ],
