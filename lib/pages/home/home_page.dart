@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:holy_bible_digital/notifiers/bible_notifier.dart';
-import '../../components/translate_button.dart';
+import '/notifiers/bible_notifier.dart';
 import '/imports/app.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,23 +11,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool firstTime = sharedPrefs.prefs.getBool('welcome') ?? true;
   String searchKey = '';
   bool showSearch = false;
   final _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    if (firstTime) {
-      return Welcome(
-        onPressed: () {
-          setState(() {
-            firstTime = false;
-          });
-        },
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Theme.of(context).colorScheme.background,
@@ -44,7 +32,7 @@ class _HomePageState extends State<HomePage> {
             : const Hometitle(),
         actions: [
           IconButton(
-            icon: showSearch
+            icon: showSearch //
                 ? const Icon(Icons.close_outlined, color: Colors.red)
                 : const Icon(Icons.search_outlined),
             onPressed: () {
@@ -62,7 +50,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.settings_outlined),
             onPressed: () {
-              context.push('/settings');
+              context.push('$homePath/settings');
             },
           ),
         ],
