@@ -108,11 +108,11 @@ class _VersePageState extends State<VersePage> {
                       ),
                     ),
                     Positioned(
-                      top: 20,
-                      right: 20,
+                      top: 22,
+                      right: 22,
                       child: Image.asset(
                         Assets.extendedDarkLogo,
-                        height: 32,
+                        height: 38,
                       ),
                     ),
                   ],
