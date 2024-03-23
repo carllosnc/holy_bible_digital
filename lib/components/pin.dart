@@ -30,12 +30,16 @@ class _PinState extends State<Pin> {
   showPinMessage(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Center(
+        content: Center(
           child: Text(
             "Marcação salva.",
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.surface,
+              fontSize: 16,
+            ),
           ),
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.onSurface,
         duration: const Duration(seconds: 1),
       ),
     );
@@ -65,15 +69,17 @@ class _PinState extends State<Pin> {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundColor: pinned
-          ? Theme.of(context).colorScheme.primary
+      maxRadius: 18,
+      backgroundColor: pinned //
+          ? Theme.of(context).colorScheme.onSurface
           : Theme.of(context).colorScheme.background,
       child: IconButton(
         onPressed: () => pinAction(context),
         icon: Icon(
+          size: 18,
           Icons.push_pin_outlined,
-          color: pinned
-              ? Theme.of(context).colorScheme.onPrimary
+          color: pinned //
+              ? Theme.of(context).colorScheme.surface
               : Theme.of(context).colorScheme.onBackground,
         ),
       ),
