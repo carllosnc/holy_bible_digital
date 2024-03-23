@@ -23,7 +23,15 @@ class Bookmark extends StatelessWidget {
 
         return Container(
           height: 55,
-          color: Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.7),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            border: Border(
+              top: BorderSide(
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+                width: 1,
+              ),
+            ),
+          ),
           child: Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
