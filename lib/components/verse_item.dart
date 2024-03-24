@@ -26,13 +26,14 @@ class VerseItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title,
+            title.toUpperCase(),
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 11,
               fontWeight: FontWeight.w800,
               color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
+          const SizedBox(height: 4),
           Text(
             formatedContent,
             style: TextStyle(
