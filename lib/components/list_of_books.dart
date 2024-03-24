@@ -51,17 +51,17 @@ class ListOfBooks extends StatelessWidget {
                 context.push('$homePath/book', extra: extras);
               },
               title: Text(
-                book.name,
+                book.name.toUpperCase(),
                 style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               trailing: const Icon(Icons.chevron_right_outlined),
               subtitle: Text(
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
-                  fontSize: 17,
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+                  fontSize: 16,
                 ),
                 '${book.chapters.length} $chapter · ${testament(
                   index: index,
