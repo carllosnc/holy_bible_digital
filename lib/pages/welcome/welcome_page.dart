@@ -21,22 +21,23 @@ class WelcomePage extends StatelessWidget {
             ),
             const SizedBox(height: 40),
             SizedBox(
-              width: 250,
+              width: 270,
               child: Column(
                 children: [
-                  const Text(
-                    'A tua palavra, Senhor, para sempre está firmada nos céus.',
+                  Text(
+                    'Para sempre, ó Senhor, a tua palavra permanece no céu.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 19,
+                      fontSize: 20,
+                      color: Colors.black.withOpacity(0.8),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
                   Text(
-                    'Salmos 119 : 89',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Theme.of(context).colorScheme.primary,
+                    'Salmos 119 : 89'.toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w800,
                     ),
                     textAlign: TextAlign.center,
                   )

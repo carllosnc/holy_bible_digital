@@ -51,10 +51,10 @@ class ListOfBooks extends StatelessWidget {
                 context.push('$homePath/book', extra: extras);
               },
               title: Text(
-                book.name.toUpperCase(),
+                book.name,
                 style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 23,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               trailing: const Icon(Icons.chevron_right_outlined),
