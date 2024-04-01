@@ -80,7 +80,6 @@ flutter:
     - ./assets/data/bible_it.gz
 
     - ./assets/images/extended_dark_logo.png
-    - ./assets/images/welcome.png
     - ./assets/images/full_logo.png
 
     - ./assets/images/flags/es.png
