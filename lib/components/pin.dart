@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/imports/app.dart';
+import '/imports.dart';
 
 class Pin extends StatefulWidget {
   final int book;
@@ -27,24 +27,6 @@ class _PinState extends State<Pin> {
     }
   }
 
-  showPinMessage(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Center(
-          child: Text(
-            "Marcação salva.",
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.surface,
-              fontSize: 16,
-            ),
-          ),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.onSurface,
-        duration: const Duration(seconds: 1),
-      ),
-    );
-  }
-
   void pinAction(BuildContext context) async {
     var bookChapter = "${widget.book}-${widget.chapter}";
     var currentPin = bookmarkNotifier.pin.value;
@@ -62,26 +44,31 @@ class _PinState extends State<Pin> {
       pinned = true;
     });
 
-    showPinMessage(context);
+    showSnackBar(
+      context: context,
+      content: const Text('Capítulo fixado!'),
+    );
+
     bookmarkNotifier.setPin(bookChapter);
   }
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      maxRadius: 18,
-      backgroundColor: pinned //
-          ? Theme.of(context).colorScheme.onSurface
-          : Theme.of(context).colorScheme.background,
-      child: IconButton(
-        onPressed: () => pinAction(context),
-        icon: Icon(
-          size: 18,
-          Icons.push_pin_outlined,
-          color: pinned //
-              ? Theme.of(context).colorScheme.surface
-              : Theme.of(context).colorScheme.onBackground,
+    return IconButton(
+      onPressed: () => pinAction(context),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(
+          pinned //
+              ? Theme.of(context).colorScheme.onSurface
+              : Theme.of(context).colorScheme.surface,
         ),
+      ),
+      icon: Icon(
+        Icons.push_pin_outlined,
+        size: 22,
+        color: pinned //
+            ? Theme.of(context).colorScheme.surface
+            : Theme.of(context).colorScheme.onSurface,
       ),
     );
   }
