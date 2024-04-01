@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:holy_bible_digital/notifiers/bible_notifier.dart';
-import '/imports/app.dart';
+import '/imports.dart';
 import './book_viewer_bottom.dart';
 import './book_viewer_content.dart';
 

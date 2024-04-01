@@ -5,7 +5,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import '/imports/app.dart';
+import '/imports.dart';
 
 class VersePage extends StatefulWidget {
   final Verse verse;

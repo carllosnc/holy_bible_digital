@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '/imports/app.dart';
+import '/imports.dart';
 
 class _BibleNotifier {
   ValueNotifier<Bible> currentBible = ValueNotifier<Bible>(

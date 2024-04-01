@@ -1,6 +1,5 @@
-import 'package:holy_bible_digital/notifiers/bible_notifier.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '/imports/app.dart';
+import '/imports.dart';
 
 class _SharedPrefs {
   late final SharedPreferences prefs;

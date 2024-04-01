@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/imports/app.dart';
+import '/imports.dart';
 
 typedef PageChangeHandle = void Function(int index);
 typedef ScrollNotificationHandle = bool Function(Notification notification);
