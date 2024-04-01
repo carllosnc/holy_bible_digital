@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart' show rootBundle;
-import '/domain/domain.dart';
+import '/imports.dart';
 
 Future<Bible> readBibleJson(String lang) async {
   // read gzipped file

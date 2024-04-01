@@ -4,7 +4,6 @@ export '/components/verse_item.dart';
 export '/components/bookmark.dart';
 export '/components/pin.dart';
 export '/components/arrow.dart';
-export '/components/welcome.dart';
 export '/components/app_version.dart';
 export '/components/book_viewer/book_viewer.dart';
 export '/components/search_bar.dart';
@@ -19,6 +18,7 @@ export '/core/helpers/formaters.dart';
 export '/core/external/shared_preferences.dart';
 export '/core/external/shorebird.dart';
 export '/core/labels/labels.dart';
+export '/core/constants/langs.dart';
 
 //data
 export '/data/repositories/bible_repository.dart';
