@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '/imports/app.dart';
-import '/notifiers/bible_notifier.dart';
+import '/imports.dart';
 
 class TranslateButton extends StatelessWidget {
   const TranslateButton({
@@ -42,31 +41,31 @@ class TranslateButton extends StatelessWidget {
                               flag: Assets.flagPtbr,
                               lang: 'pt-br',
                               currentLang: bible.lang,
-                              name: 'Português',
+                              name: labels(bible.lang)['portuguese']!,
                             ),
                             LanguageItem(
                               flag: Assets.flagUs,
                               lang: 'en',
                               currentLang: bible.lang,
-                              name: 'English',
+                              name: labels(bible.lang)['english']!,
                             ),
                             LanguageItem(
                               flag: Assets.flagFr,
                               lang: 'fr',
                               currentLang: bible.lang,
-                              name: 'Français',
+                              name: labels(bible.lang)['french']!,
                             ),
                             LanguageItem(
                               flag: Assets.flagIt,
                               lang: 'it',
                               currentLang: bible.lang,
-                              name: 'Italiano',
+                              name: labels(bible.lang)['italian']!,
                             ),
                             LanguageItem(
                               flag: Assets.flagEs,
                               lang: 'es',
                               currentLang: bible.lang,
-                              name: 'Español',
+                              name: labels(bible.lang)['spanish']!,
                             ),
                           ],
                         ),
@@ -114,21 +113,18 @@ class LanguageItem extends StatelessWidget {
         onTap: () {
           bibleNotifier.setBible(lang);
 
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Theme.of(context).colorScheme.onSurface,
-              content: Row(
-                children: [
-                  Image.asset(
-                    flag,
-                    width: 20,
-                    height: 20,
-                  ),
-                  const SizedBox(width: 10),
-                  Text("${labels(lang)["lang changed"]} $name"),
-                ],
-              ),
-              duration: const Duration(seconds: 2),
+          showSnackBar(
+            context: context,
+            content: Row(
+              children: [
+                Image.asset(
+                  flag,
+                  width: 20,
+                  height: 20,
+                ),
+                const SizedBox(width: 10),
+                Text("${labels(lang)["lang changed"]} $name"),
+              ],
             ),
           );
 
