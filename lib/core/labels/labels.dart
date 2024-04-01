@@ -1,6 +1,7 @@
 labels(String lang) {
   Map<String, Map<String, String>> content = {
     'en': {
+      'title': 'Holy Bible',
       'chapter': 'Chapter',
       'old testament': 'old testament',
       'new testament': 'new testament',
@@ -12,9 +13,14 @@ labels(String lang) {
       'italian': 'Italian',
       'spanish': 'Spanish',
       'continue': 'Continue',
-      'lang changed': 'Language changed to'
+      'lang changed': 'Language changed to',
+      'searchPlaceholder': 'Search book',
+      'settings': 'Settings',
+      'lightTheme': 'Light theme',
+      'darkTheme': 'Dark theme',
     },
     'fr': {
+      'title': 'Sainte Bible',
       'chapter': 'Chapitre',
       'old testament': 'ancien testament',
       'new testament': 'nouveau testament',
@@ -26,9 +32,14 @@ labels(String lang) {
       'italian': 'Italien',
       'spanish': 'Espagnol',
       'continue': 'Continuer',
-      'lang changed': 'Langue changée à'
+      'lang changed': 'Langue changée à',
+      'searchPlaceholder': 'Rechercher un livre',
+      'settings': 'Paramètres',
+      'lightTheme': 'Thème clair',
+      'darkTheme': 'Thème sombre',
     },
     'it': {
+      'title': 'Santa Bibbia',
       'chapter': 'Capitolo',
       'old testament': 'vecchio testamento',
       'new testament': 'nuovo testamento',
@@ -40,9 +51,14 @@ labels(String lang) {
       'italian': 'Italiano',
       'spanish': 'Spagnolo',
       'continue': 'Continua',
-      'lang changed': 'Lingua cambiata a'
+      'lang changed': 'Lingua cambiata a',
+      'searchPlaceholder': 'Cerca libro',
+      'settings': 'Impostazioni',
+      'lightTheme': 'Tema chiaro',
+      'darkTheme': 'Tema scuro',
     },
     'es': {
+      'title': 'Santa Biblia',
       'chapter': 'Capítulo',
       'old testament': 'antiguo testamento',
       'new testament': 'nuevo testamento',
@@ -54,9 +70,14 @@ labels(String lang) {
       'italian': 'Italiano',
       'spanish': 'Español',
       'continue': 'Continuar',
-      'lang changed': 'Idioma cambiado a'
+      'lang changed': 'Idioma cambiado a',
+      'searchPlaceholder': 'Buscar libro',
+      'settings': 'Ajustes',
+      'lightTheme': 'Tema claro',
+      'darkTheme': 'Tema oscuro',
     },
     'pt-br': {
+      'title': 'Bíblia Sagrada',
       'chapter': 'Capítulo',
       'old testament': 'velho testamento',
       'new testament': 'novo testamento',
@@ -68,7 +89,11 @@ labels(String lang) {
       'italian': 'Italiano',
       'spanish': 'Espanhol',
       'continue': 'Continuar',
-      'lang changed': 'Idioma alterado para'
+      'lang changed': 'Idioma alterado para',
+      'searchPlaceholder': 'Buscar livro',
+      'settings': 'Configurações',
+      'lightTheme': 'Tema Claro',
+      'darkTheme': 'Tema Escuro',
     }
   };
 

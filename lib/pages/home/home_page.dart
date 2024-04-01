@@ -77,30 +77,35 @@ class Hometitle extends StatelessWidget {
       builder: (context, Bible bible, child) {
         var flag = Assets.flagPtbr;
 
-        if (bible.lang == 'en') {
+        if (bible.lang == Langs.english.abbr) {
           flag = Assets.flagUs;
-        } else if (bible.lang == 'fr') {
+        } else if (bible.lang == Langs.french.abbr) {
           flag = Assets.flagFr;
-        } else if (bible.lang == 'it') {
+        } else if (bible.lang == Langs.italian.abbr) {
           flag = Assets.flagIt;
-        } else if (bible.lang == 'es') {
+        } else if (bible.lang == Langs.spanish.abbr) {
           flag = Assets.flagEs;
         }
 
-        return Wrap(
-          spacing: 10,
-          crossAxisAlignment: WrapCrossAlignment.end,
-          children: [
-            const Text(
-              "Bíblia Sagrada",
-              style: TextStyle(fontSize: 20),
-            ),
-            Image.asset(
-              flag,
-              width: 20,
-              height: 20,
-            )
-          ],
+        return ValueListenableBuilder(
+          valueListenable: bibleNotifier.currentBible,
+          builder: (context, Bible bible, child) {
+            return Wrap(
+              spacing: 10,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Text(
+                  labels(bible.lang)['title'],
+                  style: const TextStyle(fontSize: 22),
+                ),
+                Image.asset(
+                  flag,
+                  width: 20,
+                  height: 20,
+                )
+              ],
+            );
+          },
         );
       },
     );

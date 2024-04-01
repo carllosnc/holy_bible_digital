@@ -26,32 +26,44 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Ajustes', style: TextStyle(fontSize: 18)),
-      ),
-      body: ListView(
-        children: [
-          ListTile(
-            title: Text(_lightTheme ? 'Tema claro' : 'Tema escuro'),
-            trailing: Switch(
-              value: _lightTheme,
-              thumbIcon: MaterialStateProperty.all(
-                Icon(
-                  _lightTheme //
-                      ? Icons.light_mode
-                      : Icons.dark_mode,
-                  color: _lightTheme //
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.onPrimary,
-                ),
-              ),
-              onChanged: changeThemeHandle,
+    return ValueListenableBuilder(
+      valueListenable: bibleNotifier.currentBible,
+      builder: (context, Bible bible, child) {
+        String lightTheme = labels(bible.lang)['lightTheme']!;
+        String darkTheme = labels(bible.lang)['darkTheme']!;
+        String settings = labels(bible.lang)['settings']!;
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              settings,
+              style: const TextStyle(fontSize: 18),
             ),
           ),
-          const Divider(height: 1)
-        ],
-      ),
+          body: ListView(
+            children: [
+              ListTile(
+                title: Text(_lightTheme ? lightTheme : darkTheme),
+                trailing: Switch(
+                  value: _lightTheme,
+                  thumbIcon: MaterialStateProperty.all(
+                    Icon(
+                      _lightTheme //
+                          ? Icons.light_mode
+                          : Icons.dark_mode,
+                      color: _lightTheme //
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  ),
+                  onChanged: changeThemeHandle,
+                ),
+              ),
+              const Divider(height: 1)
+            ],
+          ),
+        );
+      },
     );
   }
 }
