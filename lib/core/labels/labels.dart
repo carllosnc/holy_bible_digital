@@ -92,8 +92,8 @@ labels(String lang) {
       'lang changed': 'Idioma alterado para',
       'searchPlaceholder': 'Buscar livro',
       'settings': 'Configurações',
-      'lightTheme': 'Tema Claro',
-      'darkTheme': 'Tema Escuro',
+      'lightTheme': 'Tema claro',
+      'darkTheme': 'Tema escuro',
     }
   };
 
