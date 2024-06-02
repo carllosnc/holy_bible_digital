@@ -19,58 +19,57 @@ class TranslateButton extends StatelessWidget {
             showModalBottomSheet(
               context: context,
               builder: (context) {
-                return SizedBox(
-                  height: 450,
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 18),
-                        width: double.infinity,
-                        child: Text(
-                          labels(bible.lang)['translates'],
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
+                return Scaffold(
+                  appBar: AppBar(
+                    leading: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.close),
+                    ),
+                    title: Text(
+                      labels(bible.lang)['translates'],
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 20,
                       ),
-                      SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            LanguageItem(
-                              flag: Assets.flagPtbr,
-                              lang: 'pt-br',
-                              currentLang: bible.lang,
-                              name: labels(bible.lang)['portuguese']!,
-                            ),
-                            LanguageItem(
-                              flag: Assets.flagUs,
-                              lang: 'en',
-                              currentLang: bible.lang,
-                              name: labels(bible.lang)['english']!,
-                            ),
-                            LanguageItem(
-                              flag: Assets.flagFr,
-                              lang: 'fr',
-                              currentLang: bible.lang,
-                              name: labels(bible.lang)['french']!,
-                            ),
-                            LanguageItem(
-                              flag: Assets.flagIt,
-                              lang: 'it',
-                              currentLang: bible.lang,
-                              name: labels(bible.lang)['italian']!,
-                            ),
-                            LanguageItem(
-                              flag: Assets.flagEs,
-                              lang: 'es',
-                              currentLang: bible.lang,
-                              name: labels(bible.lang)['spanish']!,
-                            ),
-                          ],
+                    ),
+                  ),
+                  body: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        LanguageItem(
+                          flag: Assets.flagPtbr,
+                          lang: 'pt-br',
+                          currentLang: bible.lang,
+                          name: labels(bible.lang)['portuguese']!,
                         ),
-                      ),
-                    ],
+                        LanguageItem(
+                          flag: Assets.flagUs,
+                          lang: 'en',
+                          currentLang: bible.lang,
+                          name: labels(bible.lang)['english']!,
+                        ),
+                        LanguageItem(
+                          flag: Assets.flagFr,
+                          lang: 'fr',
+                          currentLang: bible.lang,
+                          name: labels(bible.lang)['french']!,
+                        ),
+                        LanguageItem(
+                          flag: Assets.flagIt,
+                          lang: 'it',
+                          currentLang: bible.lang,
+                          name: labels(bible.lang)['italian']!,
+                        ),
+                        LanguageItem(
+                          flag: Assets.flagEs,
+                          lang: 'es',
+                          currentLang: bible.lang,
+                          name: labels(bible.lang)['spanish']!,
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
