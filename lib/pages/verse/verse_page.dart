@@ -44,6 +44,10 @@ class _VersePageState extends State<VersePage> {
           style: const TextStyle(fontSize: 16),
         ),
         actions: [
+          SaveVerse(
+            title: widget.verse.title,
+            content: widget.verse.content,
+          ),
           IconButton(
             onPressed: () async {
               var result = await captureWidget();
