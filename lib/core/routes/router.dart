@@ -46,6 +46,18 @@ final router = GoRouter(
             );
           },
         ),
+        GoRoute(
+          path: 'folders',
+          builder: (context, state) => const FoldersPage(),
+        ),
+        GoRoute(
+          path: 'folder/:id',
+          builder: (context, state) {
+            return FolderPage(
+              folderId: state.params['id']!,
+            );
+          },
+        ),
       ],
     )
   ],
