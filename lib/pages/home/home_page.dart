@@ -55,6 +55,19 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: ListOfBooks(searchKey: searchKey),
+      floatingActionButton: FloatingActionButton(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(50)),
+        ),
+        backgroundColor: Theme.of(context).colorScheme.onSurface,
+        onPressed: () {
+          context.push('$homePath/folders');
+        },
+        child: Icon(
+          Icons.folder_outlined,
+          color: Theme.of(context).colorScheme.surface,
+        ),
+      ),
       bottomNavigationBar: ValueListenableBuilder(
         valueListenable: bibleNotifier.currentBible,
         builder: (context, value, child) {
@@ -94,15 +107,15 @@ class Hometitle extends StatelessWidget {
               spacing: 10,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                Text(
-                  labels(bible.lang)['title'],
-                  style: const TextStyle(fontSize: 22),
-                ),
                 Image.asset(
                   flag,
                   width: 20,
                   height: 20,
-                )
+                ),
+                Text(
+                  labels(bible.lang)['title'],
+                  style: const TextStyle(fontSize: 20),
+                ),
               ],
             );
           },
