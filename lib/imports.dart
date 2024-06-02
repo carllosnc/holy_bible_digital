@@ -9,6 +9,8 @@ export '/components/book_viewer/book_viewer.dart';
 export '/components/search_bar.dart';
 export '/components/translate_button.dart';
 export '/components/show_snack_bar.dart';
+export '/components/create_folder_button.dart';
+export '/components/save_verse.dart';
 
 //core
 export '/core/themes/basic.theme.dart';
@@ -27,6 +29,7 @@ export '/data/repositories/bible_repository.dart';
 export './domain/entities/bible/bible.dart';
 export './domain/entities/book/book.dart';
 export './domain/entities/verse/verse.dart';
+export './domain/entities/folder/folder.dart';
 
 //notifiers
 export './notifiers/theme_notifier.dart';
@@ -39,6 +42,11 @@ export '/pages/settings/settings_pages.dart';
 export '/pages/book/book_page.dart';
 export '/pages/verse/verse_page.dart';
 export '/pages/welcome/welcome_page.dart';
+export '/pages/folders/folders_page.dart';
+export '/pages/folder/folder_page.dart';
 
 //platforms
 export './platforms/windows.dart';
+
+//database
+export './database/bible_database.dart';
