@@ -12,6 +12,9 @@ void main() async {
   //load shorebird
   await ShoreBird().loadShoreBird();
 
+  //load database
+  await bibleDatabase.init();
+
   //lock screen to landscape
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
