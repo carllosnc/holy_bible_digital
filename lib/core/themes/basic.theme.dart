@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 appTheme({required bool isLight}) => ThemeData(
       useMaterial3: true,
       brightness: isLight ? Brightness.light : Brightness.dark,
-      colorSchemeSeed: Colors.grey,
+      colorSchemeSeed: Colors.blue,
       fontFamily: 'SFProDisplay',
       bottomSheetTheme: const BottomSheetThemeData(
+        surfaceTintColor: Colors.transparent,
+      ),
+      dialogTheme: const DialogTheme(
         surfaceTintColor: Colors.transparent,
       ),
       pageTransitionsTheme: const PageTransitionsTheme(
