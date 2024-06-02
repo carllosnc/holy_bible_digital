@@ -42,7 +42,6 @@ class BookViewerState extends State<BookViewer> {
     _verseScrollController = ScrollController();
   }
 
-  // call this function when a page is changed
   void pageChangeHandle(index) {
     _verseScrollController = ScrollController();
     double width = MediaQuery.of(context).size.width;
@@ -81,68 +80,69 @@ class BookViewerState extends State<BookViewer> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: bibleNotifier.currentBible,
-        builder: (context, bible, child) {
-          Book book = bible.books[widget.book];
+      valueListenable: bibleNotifier.currentBible,
+      builder: (context, bible, child) {
+        Book book = bible.books[widget.book];
 
-          return Scaffold(
-            appBar: AppBar(
-              bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(1),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      color: Colors.transparent,
-                      height: 0,
-                    ),
-                    Container(
-                      width: _schollIndicator.toDouble(),
-                      color: Theme.of(context).colorScheme.onSurface,
-                      height: 4,
-                    ),
-                  ],
-                ),
-              ),
-              actions: [
-                Pin(
-                  key: UniqueKey(),
-                  book: widget.book,
-                  chapter: _currentPage,
-                ),
-                Arrow(
-                  key: UniqueKey(),
-                  type: ArrowType.previous,
-                  pageController: _pageController,
-                  currentPage: _currentPage,
-                ),
-                Arrow(
-                  key: UniqueKey(),
-                  type: ArrowType.next,
-                  pageController: _pageController,
-                  currentPage: _currentPage,
-                ),
-              ],
-              title: Text(
-                "${book.name.adaptName()} - Cap: ${_currentPage + 1}",
-                style: const TextStyle(fontSize: 16),
+        return Scaffold(
+          appBar: AppBar(
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(1),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    color: Colors.transparent,
+                    height: 0,
+                  ),
+                  Container(
+                    width: _schollIndicator.toDouble(),
+                    color: Theme.of(context).colorScheme.onSurface,
+                    height: 4,
+                  ),
+                ],
               ),
             ),
-            body: BookViewerContent(
-              pageController: _pageController,
-              verseScrollController: _verseScrollController,
-              onScrollNotification: calculateScrollIndicatorHandle,
-              onPageChange: pageChangeHandle,
-              currentPage: _currentPage,
-              book: book,
+            actions: [
+              Pin(
+                key: UniqueKey(),
+                book: widget.book,
+                chapter: _currentPage,
+              ),
+              Arrow(
+                key: UniqueKey(),
+                type: ArrowType.previous,
+                pageController: _pageController,
+                currentPage: _currentPage,
+              ),
+              Arrow(
+                key: UniqueKey(),
+                type: ArrowType.next,
+                pageController: _pageController,
+                currentPage: _currentPage,
+              ),
+            ],
+            title: Text(
+              "${book.name.adaptName()} - Cap: ${_currentPage + 1}",
+              style: const TextStyle(fontSize: 16),
             ),
-            bottomNavigationBar: BookViewerBottom(
-              pageController: _pageController,
-              scrollController: _scrollController,
-              currentPage: _currentPage,
-              book: book,
-            ),
-          );
-        });
+          ),
+          body: BookViewerContent(
+            pageController: _pageController,
+            verseScrollController: _verseScrollController,
+            onScrollNotification: calculateScrollIndicatorHandle,
+            onPageChange: pageChangeHandle,
+            currentPage: _currentPage,
+            book: book,
+          ),
+          bottomNavigationBar: BookViewerBottom(
+            pageController: _pageController,
+            scrollController: _scrollController,
+            currentPage: _currentPage,
+            book: book,
+          ),
+        );
+      },
+    );
   }
 }
