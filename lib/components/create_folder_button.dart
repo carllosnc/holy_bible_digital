@@ -38,7 +38,7 @@ class _CreateFolderButtonState extends State<CreateFolderButton> {
               appBar: AppBar(
                 title: const Text(
                   'Criar pasta',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 20),
                 ),
                 leading: IconButton(
                   onPressed: () {

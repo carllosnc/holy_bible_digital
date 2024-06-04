@@ -45,7 +45,7 @@ class _FoldersPageState extends State<FoldersPage> {
                     ),
                     const SizedBox(height: 10),
                     const Text(
-                      "No folders found",
+                      "Nenhuma pasta criada",
                       style: TextStyle(fontSize: 18),
                     ),
                   ],

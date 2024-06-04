@@ -34,7 +34,7 @@ class _SaveVerseState extends State<SaveVerse> {
                   },
                   icon: const Icon(Icons.close),
                 ),
-                title: const Text('Pastas'),
+                title: const Text('Pastas', style: TextStyle(fontSize: 20)),
               ),
               body: StreamBuilder<List<Map<String, Object?>>>(
                 stream: bibleDatabase.folderData.stream,
@@ -73,6 +73,7 @@ class _SaveVerseState extends State<SaveVerse> {
                         return ListTile(
                           onTap: () {
                             saveVerse(
+                              folderName: folder.name,
                               folderId: folder.id.toString(),
                               context: context,
                             );
@@ -100,6 +101,7 @@ class _SaveVerseState extends State<SaveVerse> {
   void saveVerse({
     required String folderId,
     required BuildContext context,
+    required String folderName,
   }) {
     Verse verse = Verse(
       title: widget.title,
@@ -107,6 +109,10 @@ class _SaveVerseState extends State<SaveVerse> {
       folderId: folderId,
     );
 
-    bibleDatabase.addVerse(verse, context);
+    bibleDatabase.addVerse(
+      verse: verse,
+      folderName: folderName,
+      context: context,
+    );
   }
 }
