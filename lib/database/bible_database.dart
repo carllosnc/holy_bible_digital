@@ -104,7 +104,11 @@ class _BibleDatabase {
     }
   }
 
-  Future<void> addVerse(Verse verse, BuildContext context) async {
+  Future<void> addVerse({
+    required Verse verse,
+    required String folderName,
+    required BuildContext context,
+  }) async {
     await _database.then((db) async {
       await db.insert(
         'verse',
@@ -115,7 +119,7 @@ class _BibleDatabase {
     if (context.mounted) {
       showSnackBar(
         context: context,
-        content: const Text('Verse added'),
+        content: Text('Verse added to $folderName'),
       );
 
       Navigator.of(context).pop();
