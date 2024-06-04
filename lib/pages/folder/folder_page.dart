@@ -17,10 +17,7 @@ class _FolderPageState extends State<FolderPage> {
   Folder? folderDetails;
   List<Verse> verses = [];
 
-  @override
-  void initState() {
-    super.initState();
-
+  getData() {
     bibleDatabase.getFolderById(int.parse(widget.folderId)).then((folder) {
       setState(() {
         folderDetails = folder;
@@ -32,6 +29,13 @@ class _FolderPageState extends State<FolderPage> {
         this.verses = verses;
       });
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    getData();
   }
 
   @override
@@ -69,7 +73,7 @@ class _FolderPageState extends State<FolderPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                Icons.menu,
+                Icons.folder_outlined,
                 size: 100,
                 color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
               ),
@@ -95,7 +99,7 @@ class _FolderPageState extends State<FolderPage> {
             Verse verse = verses[index];
 
             return Dismissible(
-              key: Key(verse.id.toString()),
+              key: UniqueKey(),
               direction: DismissDirection.endToStart,
               background: Container(
                 color: Theme.of(context).colorScheme.onSurface,
@@ -116,6 +120,14 @@ class _FolderPageState extends State<FolderPage> {
               ),
               onDismissed: (direction) async {
                 await bibleDatabase.removeVerse(verse.id!);
+                getData();
+
+                if (context.mounted) {
+                  showSnackBar(
+                    context: context,
+                    content: const Text("Verso deletado"),
+                  );
+                }
               },
               child: ListTile(
                 contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -140,7 +152,6 @@ class _FolderPageState extends State<FolderPage> {
                     ),
                   ],
                 ),
-                onTap: () {},
               ),
             );
           },
