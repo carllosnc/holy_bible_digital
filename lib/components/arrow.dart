@@ -24,17 +24,13 @@ class _ArrowState extends State<Arrow> {
     return IconButton(
       onPressed: () {
         widget.pageController.animateToPage(
-          widget.type == ArrowType.next
-              ? widget.currentPage + 1
-              : widget.currentPage - 1,
+          widget.type == ArrowType.next ? widget.currentPage + 1 : widget.currentPage - 1,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOut,
         );
       },
       icon: Icon(
-        widget.type == ArrowType.next
-            ? Icons.chevron_right
-            : Icons.chevron_left,
+        widget.type == ArrowType.next ? Icons.chevron_right : Icons.chevron_left,
       ),
     );
   }

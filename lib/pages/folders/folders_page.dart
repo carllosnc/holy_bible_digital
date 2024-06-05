@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:holy_bible_digital/core/extensions/string_extensions.dart';
 import '/imports.dart';
 
 class FoldersPage extends StatefulWidget {
@@ -68,7 +69,13 @@ class _FoldersPageState extends State<FoldersPage> {
                   trailing: const Icon(
                     Icons.chevron_right,
                   ),
-                  title: Text(folder.name),
+                  title: Text(
+                    folder.name.capitalize(),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 );
               },
             );

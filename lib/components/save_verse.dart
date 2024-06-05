@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:holy_bible_digital/core/extensions/string_extensions.dart';
 import '/imports.dart';
 
 class SaveVerse extends StatefulWidget {
@@ -79,7 +80,13 @@ class _SaveVerseState extends State<SaveVerse> {
                             );
                           },
                           leading: const Icon(Icons.folder_outlined),
-                          title: Text(folder.name),
+                          title: Text(
+                            folder.name.capitalize(),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         );
                       },
                     );

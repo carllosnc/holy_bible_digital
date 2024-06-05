@@ -118,22 +118,41 @@ class _BibleDatabase {
 
     if (context.mounted) {
       showSnackBar(
+        backgroundColor: Colors.green.shade700,
         context: context,
-        content: Text('Verse added to $folderName'),
+        content: Text(
+          'Verse added to $folderName',
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
       );
 
       Navigator.of(context).pop();
     }
   }
 
-  Future<void> removeVerse(int id) async {
-    await _database.then((db) async {
-      await db.delete(
-        'verse',
-        where: 'id = ?',
-        whereArgs: [id],
+  Future<void> removeVerse(int id, BuildContext context) async {
+    final db = await _database;
+
+    await db.delete(
+      'verse',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (context.mounted) {
+      showSnackBar(
+        backgroundColor: Colors.red.shade700,
+        context: context,
+        content: const Text(
+          "Verso deletado",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
       );
-    });
+    }
   }
 
   Future<List<Verse>> getVersesFromFolder(int id) async {

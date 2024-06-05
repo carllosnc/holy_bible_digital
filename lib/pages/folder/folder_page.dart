@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holy_bible_digital/core/extensions/string_extensions.dart';
 import '/imports.dart';
 
 class FolderPage extends StatefulWidget {
@@ -52,8 +53,11 @@ class _FolderPageState extends State<FolderPage> {
       appBar: AppBar(
         surfaceTintColor: Theme.of(context).colorScheme.background,
         title: Text(
-          folderDetails!.name,
-          style: const TextStyle(fontSize: 18),
+          folderDetails!.name.capitalize(),
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         actions: [
           IconButton(
@@ -119,15 +123,8 @@ class _FolderPageState extends State<FolderPage> {
                 ),
               ),
               onDismissed: (direction) async {
-                await bibleDatabase.removeVerse(verse.id!);
+                await bibleDatabase.removeVerse(verse.id!, context);
                 getData();
-
-                if (context.mounted) {
-                  showSnackBar(
-                    context: context,
-                    content: const Text("Verso deletado"),
-                  );
-                }
               },
               child: ListTile(
                 contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
