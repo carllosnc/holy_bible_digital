@@ -120,11 +120,16 @@ class _BibleDatabase {
       showSnackBar(
         backgroundColor: Colors.green.shade700,
         context: context,
-        content: Text(
-          'Verse added to $folderName',
-          style: const TextStyle(
-            color: Colors.white,
-          ),
+        content: ValueListenableBuilder(
+          valueListenable: bibleNotifier.currentBible,
+          builder: (context, value, child) {
+            return Text(
+              "${labels(value.lang)['verseDeleted']} $folderName",
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            );
+          },
         ),
       );
 
@@ -145,11 +150,16 @@ class _BibleDatabase {
       showSnackBar(
         backgroundColor: Colors.red.shade700,
         context: context,
-        content: const Text(
-          "Verso deletado",
-          style: TextStyle(
-            color: Colors.white,
-          ),
+        content: ValueListenableBuilder(
+          valueListenable: bibleNotifier.currentBible,
+          builder: (context, value, child) {
+            return Text(
+              labels(value.lang)['verseDeleted'],
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            );
+          },
         ),
       );
     }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:holy_bible_digital/core/extensions/string_extensions.dart';
+import '/core/extensions/string_extensions.dart';
 import '/imports.dart';
 
 class FolderPage extends StatefulWidget {
@@ -49,111 +49,118 @@ class _FolderPageState extends State<FolderPage> {
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        surfaceTintColor: Theme.of(context).colorScheme.background,
-        title: Text(
-          folderDetails!.name.capitalize(),
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.delete_outline,
-              color: Colors.red,
-            ),
-            onPressed: () {
-              deleteFolder(context);
-            },
-          ),
-        ],
-      ),
-      body: Builder(builder: (context) {
-        if (verses.isEmpty) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.folder_outlined,
-                size: 100,
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+    return ValueListenableBuilder(
+      valueListenable: bibleNotifier.currentBible,
+      builder: (context, value, child) {
+        return Scaffold(
+          appBar: AppBar(
+            surfaceTintColor: Theme.of(context).colorScheme.background,
+            title: Text(
+              folderDetails!.name.capitalize(),
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
               ),
-              const Center(
-                child: Text(
-                  'Nenhum verso nesta pasta',
-                  style: TextStyle(fontSize: 18),
+            ),
+            actions: [
+              IconButton(
+                icon: const Icon(
+                  Icons.delete_outline,
+                  color: Colors.red,
                 ),
+                onPressed: () {
+                  deleteFolder(context);
+                },
               ),
             ],
-          );
-        }
-
-        return ListView.separated(
-          itemCount: verses.length,
-          padding: const EdgeInsets.symmetric(vertical: 5),
-          separatorBuilder: (context, index) => Divider(
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-            height: 10,
           ),
-          addRepaintBoundaries: true,
-          itemBuilder: (context, index) {
-            Verse verse = verses[index];
+          body: Builder(
+            builder: (context) {
+              if (verses.isEmpty) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.folder_outlined,
+                      size: 100,
+                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+                    ),
+                    Center(
+                      child: Text(
+                        labels(value.lang)['noOneVerse'],
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ),
+                  ],
+                );
+              }
 
-            return Dismissible(
-              key: UniqueKey(),
-              direction: DismissDirection.endToStart,
-              background: Container(
-                color: Theme.of(context).colorScheme.onSurface,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 40,
-                      ),
-                      child: Icon(
-                        Icons.delete_outline,
-                        color: Theme.of(context).colorScheme.surface,
-                      ),
-                    ),
-                  ],
+              return ListView.separated(
+                itemCount: verses.length,
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                separatorBuilder: (context, index) => Divider(
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+                  height: 10,
                 ),
-              ),
-              onDismissed: (direction) async {
-                await bibleDatabase.removeVerse(verse.id!, context);
-                getData();
-              },
-              child: ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      verse.title.toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w800,
-                        color: Theme.of(context).colorScheme.onSurface,
+                addRepaintBoundaries: true,
+                itemBuilder: (context, index) {
+                  Verse verse = verses[index];
+
+                  return Dismissible(
+                    key: UniqueKey(),
+                    direction: DismissDirection.endToStart,
+                    background: Container(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 40,
+                            ),
+                            child: Icon(
+                              Icons.delete_outline,
+                              color: Theme.of(context).colorScheme.surface,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      verse.content,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+                    onDismissed: (direction) async {
+                      await bibleDatabase.removeVerse(verse.id!, context);
+                      getData();
+                    },
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            verse.title.toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w800,
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            verse.content,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            );
-          },
+                  );
+                },
+              );
+            },
+          ),
         );
-      }),
+      },
     );
   }
 
@@ -161,31 +168,36 @@ class _FolderPageState extends State<FolderPage> {
     return showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: const Text('Excluir pasta'),
-          content: const Text('Tem certeza que deseja excluir esta pasta?'),
-          actions: <Widget>[
-            FilledButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                  Theme.of(context).colorScheme.onSurface,
+        return ValueListenableBuilder(
+          valueListenable: bibleNotifier.currentBible,
+          builder: (context, value, child) {
+            return AlertDialog(
+              title: Text(labels(value.lang)['deleteFolder']),
+              content: Text(labels(value.lang)['sureToDelete']),
+              actions: <Widget>[
+                FilledButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(labels(value.lang)['no']),
                 ),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Não'),
-            ),
-            OutlinedButton(
-              onPressed: () {
-                bibleDatabase.removeFolder(
-                  int.parse(widget.folderId),
-                  context,
-                );
-              },
-              child: const Text('Sim'),
-            ),
-          ],
+                OutlinedButton(
+                  onPressed: () {
+                    bibleDatabase.removeFolder(
+                      int.parse(widget.folderId),
+                      context,
+                    );
+                  },
+                  child: Text(labels(value.lang)['yes']),
+                ),
+              ],
+            );
+          },
         );
       },
     );

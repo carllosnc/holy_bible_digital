@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:holy_bible_digital/imports.dart';
+import '/imports.dart';
 
 class CreateFolderButton extends StatefulWidget {
   const CreateFolderButton({
@@ -34,63 +34,70 @@ class _CreateFolderButtonState extends State<CreateFolderButton> {
         showModalBottomSheet(
           context: context,
           builder: (context) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text(
-                  'Criar pasta',
-                  style: TextStyle(fontSize: 20),
-                ),
-                leading: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(Icons.close),
-                ),
-              ),
-              body: SingleChildScrollView(
-                child: Form(
-                  key: formKey,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 18,
+            return ValueListenableBuilder(
+              valueListenable: bibleNotifier.currentBible,
+              builder: (context, currentBible, child) {
+                return Scaffold(
+                  appBar: AppBar(
+                    title: Text(
+                      labels(currentBible.lang)['createFolder'],
+                      style: const TextStyle(fontSize: 20),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextFormField(
-                          controller: nameController,
-                          validator: (value) => value!.isEmpty ? 'Nome da pasta é obrigatório' : null,
-                          decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.folder_outlined),
-                            labelText: 'Nome da pasta',
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        FilledButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              Theme.of(context).colorScheme.onSurface,
-                            ),
-                          ),
-                          onPressed: () {
-                            createFolder(context);
-                          },
-                          child: Text(
-                            "Criar",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Theme.of(context).colorScheme.surface,
-                            ),
-                          ),
-                        )
-                      ],
+                    leading: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.close),
                     ),
                   ),
-                ),
-              ),
+                  body: SingleChildScrollView(
+                    child: Form(
+                      key: formKey,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 18,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              controller: nameController,
+                              validator: (value) => value!.isEmpty //
+                                  ? labels(currentBible.lang)['nameIsRequired']! //
+                                  : null,
+                              decoration: InputDecoration(
+                                suffixIcon: const Icon(Icons.folder_outlined),
+                                labelText: labels(currentBible.lang)['folderName'],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            FilledButton(
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                  Theme.of(context).colorScheme.onSurface,
+                                ),
+                              ),
+                              onPressed: () {
+                                createFolder(context);
+                              },
+                              child: Text(
+                                labels(currentBible.lang)['create'],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Theme.of(context).colorScheme.surface,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
             );
           },
         );
