@@ -152,7 +152,7 @@ labels(String lang) {
       'nameIsRequired': 'Nome é obrigatório',
       'folderName': 'Nome da pasta',
       'create': 'Criar',
-      'noOneVerse': 'Nenhuma verso nesta pasta',
+      'noOneVerse': 'Nenhum verso nesta pasta',
       'deleteFolder': 'Excluir pasta',
       'sureToDelete': 'Tem certeza que deseja excluir esta pasta?',
       'yes': 'Sim',
