@@ -124,7 +124,7 @@ class _BibleDatabase {
           valueListenable: bibleNotifier.currentBible,
           builder: (context, value, child) {
             return Text(
-              "${labels(value.lang)['verseDeleted']} $folderName",
+              "${labels(value.lang)['verseAdded']} $folderName",
               style: const TextStyle(
                 color: Colors.white,
               ),
