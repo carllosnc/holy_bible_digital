@@ -23,7 +23,7 @@ class BookViewerState extends State<BookViewer> {
   late ScrollController _verseScrollController;
   late int _currentPage;
 
-  num _schollIndicator = 0;
+  num _scrollIndicator = 0;
 
   @override
   void initState() {
@@ -70,7 +70,7 @@ class BookViewerState extends State<BookViewer> {
       num scrollIndicator = withSize * percent;
 
       setState(() {
-        _schollIndicator = scrollIndicator;
+        _scrollIndicator = scrollIndicator;
       });
     }
 
@@ -96,7 +96,7 @@ class BookViewerState extends State<BookViewer> {
                     height: 0,
                   ),
                   Container(
-                    width: _schollIndicator.toDouble(),
+                    width: _scrollIndicator.toDouble(),
                     color: Theme.of(context).colorScheme.onSurface,
                     height: 4,
                   ),
