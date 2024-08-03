@@ -4,6 +4,7 @@ import 'components/search_book.dart';
 import 'components/translate_button.dart';
 import 'components/book_list.dart';
 import 'components/bookmark.dart';
+import 'components/set_theme_button.dart';
 import '/imports.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,12 +51,7 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           const TranslateButton(),
-          IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            onPressed: () {
-              context.push('$homePath/settings');
-            },
-          ),
+          const SetThemeButton(),
         ],
       ),
       body: BookList(searchKey: searchKey),
