@@ -11,7 +11,7 @@ class _SharedPrefs {
     final bool? welcome = prefs.getBool('welcome');
     final String? bookmarkPin = prefs.getString('bookmark_pin');
     final String? bibleLang = prefs.getString('bible_lang');
-    final bool? lightTheme = prefs.getBool('lightTheme');
+    final bool? lightTheme = prefs.getBool('light_theme');
 
     await bibleNotifier.setBible(bibleLang ?? 'pt-br');
 
