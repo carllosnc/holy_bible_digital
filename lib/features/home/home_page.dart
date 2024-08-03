@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           ),
           const TranslateButton(),
           IconButton(
-            icon: const Icon(Icons.settings_outlined),
+            icon: const Icon(Icons.sunny),
             onPressed: () {
               context.push('$homePath/settings');
             },

@@ -37,13 +37,13 @@ export './notifiers/bookmark_notifier.dart';
 export './notifiers/bible_notifier.dart';
 
 //pages
-export '/pages/home/home_page.dart';
-export '/pages/settings/settings_pages.dart';
-export '/pages/book/book_page.dart';
-export '/pages/verse/verse_page.dart';
-export '/pages/welcome/welcome_page.dart';
-export '/pages/folders/folders_page.dart';
-export '/pages/folder/folder_page.dart';
+export 'features/home/home_page.dart';
+export 'features/settings/settings_pages.dart';
+export 'features/book/book_page.dart';
+export 'features/verse/verse_page.dart';
+export 'features/welcome/welcome_page.dart';
+export 'features/folders/folders_page.dart';
+export 'features/folder/folder_page.dart';
 
 //platforms
 export './platforms/windows.dart';
