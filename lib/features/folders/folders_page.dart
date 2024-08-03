@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import 'components/create_folder_button.dart';
 import '/core/extensions/string_extensions.dart';
+
 import '/imports.dart';
 
 class FoldersPage extends StatefulWidget {

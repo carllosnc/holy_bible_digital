@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/imports.dart';
+import 'components/book_viewer.dart';
 
 class BookPage extends StatelessWidget {
   final int book;
@@ -13,6 +13,9 @@ class BookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BookViewer(book: book, chapter: chapter);
+    return BookViewer(
+      book: book,
+      chapter: chapter,
+    );
   }
 }

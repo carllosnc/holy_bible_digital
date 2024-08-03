@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'book_viewer_bottom.dart';
+import 'book_viewer_content.dart';
+import 'pin.dart';
+import 'arrow.dart';
+
 import '/imports.dart';
-import './book_viewer_bottom.dart';
-import './book_viewer_content.dart';
 
 class BookViewer extends StatefulWidget {
   final int book;

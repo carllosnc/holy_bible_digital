@@ -19,10 +19,6 @@ final router = GoRouter(
       builder: (context, state) => const HomePage(),
       routes: [
         GoRoute(
-          path: 'settings',
-          builder: (context, state) => const SettingsPage(),
-        ),
-        GoRoute(
           path: 'book',
           builder: (context, state) {
             final extras = state.extra as Map<String, dynamic>;

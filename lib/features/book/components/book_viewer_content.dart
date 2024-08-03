@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'verse_item.dart';
 import '/imports.dart';
 
 typedef PageChangeHandle = void Function(int index);

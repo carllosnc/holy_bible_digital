@@ -1,12 +1,5 @@
 //components
-export '/components/verse_item.dart';
-export '/components/pin.dart';
-export '/components/arrow.dart';
-export '/components/app_version.dart';
-export '/components/book_viewer/book_viewer.dart';
 export '/components/show_snack_bar.dart';
-export '/components/create_folder_button.dart';
-export '/components/save_verse.dart';
 
 //core
 export '/core/themes/basic.theme.dart';
@@ -28,13 +21,15 @@ export './domain/entities/verse/verse.dart';
 export './domain/entities/folder/folder.dart';
 
 //notifiers
-export './notifiers/theme_notifier.dart';
 export './notifiers/bookmark_notifier.dart';
 export './notifiers/bible_notifier.dart';
 
+//shared states
+export './shared_states/theme_state.dart';
+export './shared_states/shared_states.dart';
+
 //pages
 export 'features/home/home_page.dart';
-export 'features/settings/settings_pages.dart';
 export 'features/book/book_page.dart';
 export 'features/verse/verse_page.dart';
 export 'features/welcome/welcome_page.dart';

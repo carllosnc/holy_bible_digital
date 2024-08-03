@@ -8,7 +8,6 @@ class _SharedPrefs {
     prefs = await SharedPreferences.getInstance();
 
     // get from shared preferences
-    final bool? lightTheme = prefs.getBool('lightTheme');
     final bool? welcome = prefs.getBool('welcome');
     final String? bookmarkPin = prefs.getString('bookmark_pin');
     final String? bibleLang = prefs.getString('bible_lang');
@@ -23,11 +22,6 @@ class _SharedPrefs {
     // set welcome to the welcome notifier
     if (welcome == null) {
       prefs.setBool('welcome', true);
-    }
-
-    // set theme to the theme notifier
-    if (lightTheme != null) {
-      themeNotifier.lightTheme.value = lightTheme;
     }
   }
 }
