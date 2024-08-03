@@ -15,28 +15,28 @@ class Pin extends StatefulWidget {
   State<Pin> createState() => _PinState();
 }
 
-class _PinState extends State<Pin> {
+class _PinState extends State<Pin> with SharedState {
   bool pinned = false;
 
   @override
   void initState() {
     super.initState();
 
-    if (bookmarkNotifier.pin.value == "${widget.book}-${widget.chapter}") {
+    if (bookmarkState.pin == "${widget.book}-${widget.chapter}") {
       pinned = true;
     }
   }
 
   void pinAction(BuildContext context) async {
     var bookChapter = "${widget.book}-${widget.chapter}";
-    var currentPin = bookmarkNotifier.pin.value;
+    var currentPin = bookmarkState.pin;
 
     if (currentPin == bookChapter) {
       setState(() {
         pinned = false;
       });
 
-      bookmarkNotifier.setPin(null);
+      bookmarkState.setPin(null);
       return;
     }
 
@@ -49,7 +49,7 @@ class _PinState extends State<Pin> {
       content: const Text('Capítulo fixado!'),
     );
 
-    bookmarkNotifier.setPin(bookChapter);
+    bookmarkState.setPin(bookChapter);
   }
 
   @override

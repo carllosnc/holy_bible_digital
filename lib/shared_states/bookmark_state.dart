@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class _BookmarkNotifier {
-  ValueNotifier<String?> pin = ValueNotifier<String?>(null);
+class _BookmarkState extends ChangeNotifier {
+  String? pin;
 
   setPin(String? value) async {
-    pin.value = value;
+    pin = value;
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -15,7 +15,9 @@ class _BookmarkNotifier {
     }
 
     prefs.setString('bookmark_pin', value);
+
+    notifyListeners();
   }
 }
 
-var bookmarkNotifier = _BookmarkNotifier();
+var bookmarkState = _BookmarkState();

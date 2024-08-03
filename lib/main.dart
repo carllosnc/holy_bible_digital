@@ -9,9 +9,6 @@ void main() async {
   //load preferences
   await sharedPrefs.loadPreferences();
 
-  //load shorebird
-  await ShoreBird().loadShoreBird();
-
   //load database
   await bibleDatabase.init();
 
