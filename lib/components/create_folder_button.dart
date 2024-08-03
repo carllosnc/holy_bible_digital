@@ -76,7 +76,7 @@ class _CreateFolderButtonState extends State<CreateFolderButton> {
                             ),
                             FilledButton(
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
+                                backgroundColor: WidgetStateProperty.all(
                                   Theme.of(context).colorScheme.onSurface,
                                 ),
                               ),

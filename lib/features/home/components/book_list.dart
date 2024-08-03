@@ -3,10 +3,10 @@ import 'package:go_router/go_router.dart';
 import '/core/extensions/string_extensions.dart';
 import '/imports.dart';
 
-class ListOfBooks extends StatelessWidget {
+class BookList extends StatelessWidget {
   final String searchKey;
 
-  const ListOfBooks({
+  const BookList({
     super.key,
     this.searchKey = '',
   });

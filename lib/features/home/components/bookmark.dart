@@ -62,7 +62,7 @@ class Bookmark extends StatelessWidget {
                     height: 30,
                     child: FilledButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
+                        backgroundColor: WidgetStateProperty.all<Color>(
                           Theme.of(context).colorScheme.onSurface,
                         ),
                       ),

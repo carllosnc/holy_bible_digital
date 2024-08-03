@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'components/search_book.dart';
+import 'components/translate_button.dart';
+import 'components/book_list.dart';
+import 'components/bookmark.dart';
 import '/imports.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,7 +32,7 @@ class _HomePageState extends State<HomePage> {
                   });
                 },
               )
-            : const Hometitle(),
+            : const HomeTitle(),
         actions: [
           IconButton(
             icon: showSearch //
@@ -47,14 +51,14 @@ class _HomePageState extends State<HomePage> {
           ),
           const TranslateButton(),
           IconButton(
-            icon: const Icon(Icons.sunny),
+            icon: const Icon(Icons.settings_outlined),
             onPressed: () {
               context.push('$homePath/settings');
             },
           ),
         ],
       ),
-      body: ListOfBooks(searchKey: searchKey),
+      body: BookList(searchKey: searchKey),
       floatingActionButton: FloatingActionButton(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(50)),
@@ -78,8 +82,8 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class Hometitle extends StatelessWidget {
-  const Hometitle({
+class HomeTitle extends StatelessWidget {
+  const HomeTitle({
     super.key,
   });
 

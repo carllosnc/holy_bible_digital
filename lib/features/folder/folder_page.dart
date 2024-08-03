@@ -54,7 +54,7 @@ class _FolderPageState extends State<FolderPage> {
       builder: (context, value, child) {
         return Scaffold(
           appBar: AppBar(
-            surfaceTintColor: Theme.of(context).colorScheme.background,
+            surfaceTintColor: Theme.of(context).colorScheme.surface,
             title: Text(
               folderDetails!.name.capitalize(),
               style: const TextStyle(
@@ -177,7 +177,7 @@ class _FolderPageState extends State<FolderPage> {
               actions: <Widget>[
                 FilledButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
+                    backgroundColor: WidgetStateProperty.all(
                       Theme.of(context).colorScheme.onSurface,
                     ),
                   ),

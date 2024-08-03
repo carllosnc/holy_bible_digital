@@ -57,7 +57,7 @@ class _PinState extends State<Pin> {
     return IconButton(
       onPressed: () => pinAction(context),
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(
+        backgroundColor: WidgetStateProperty.all<Color>(
           pinned //
               ? Theme.of(context).colorScheme.onSurface
               : Theme.of(context).colorScheme.surface,

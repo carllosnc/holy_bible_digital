@@ -46,7 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 title: Text(_lightTheme ? lightTheme : darkTheme),
                 trailing: Switch(
                   value: _lightTheme,
-                  thumbIcon: MaterialStateProperty.all(
+                  thumbIcon: WidgetStateProperty.all(
                     Icon(
                       _lightTheme //
                           ? Icons.light_mode

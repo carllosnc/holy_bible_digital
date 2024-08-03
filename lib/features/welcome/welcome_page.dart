@@ -48,10 +48,15 @@ class WelcomePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 40,
+          vertical: 20,
+        ),
         child: FilledButton(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onSurface),
+            backgroundColor: WidgetStateProperty.all(
+              Theme.of(context).colorScheme.onSurface,
+            ),
           ),
           onPressed: () {
             sharedPrefs.prefs.setBool('welcome', false);

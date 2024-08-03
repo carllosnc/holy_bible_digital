@@ -1,13 +1,9 @@
 //components
-export '/components/list_of_books.dart';
 export '/components/verse_item.dart';
-export '/components/bookmark.dart';
 export '/components/pin.dart';
 export '/components/arrow.dart';
 export '/components/app_version.dart';
 export '/components/book_viewer/book_viewer.dart';
-export '/components/search_bar.dart';
-export '/components/translate_button.dart';
 export '/components/show_snack_bar.dart';
 export '/components/create_folder_button.dart';
 export '/components/save_verse.dart';

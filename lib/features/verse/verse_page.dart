@@ -38,7 +38,7 @@ class _VersePageState extends State<VersePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        surfaceTintColor: Theme.of(context).colorScheme.background,
+        surfaceTintColor: Theme.of(context).colorScheme.surface,
         title: Text(
           widget.verse.title,
           style: const TextStyle(fontSize: 16),
