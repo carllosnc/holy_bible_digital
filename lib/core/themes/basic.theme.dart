@@ -5,6 +5,12 @@ appTheme({required bool isLight}) => ThemeData(
       brightness: isLight ? Brightness.light : Brightness.dark,
       colorSchemeSeed: Colors.blue,
       fontFamily: 'SFProDisplay',
+      appBarTheme: const AppBarTheme(
+        surfaceTintColor: Colors.transparent,
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        shadowColor: null,
+      ),
       bottomSheetTheme: const BottomSheetThemeData(
         surfaceTintColor: Colors.transparent,
       ),

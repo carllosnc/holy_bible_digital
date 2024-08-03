@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        surfaceTintColor: Theme.of(context).colorScheme.background,
+        forceMaterialTransparency: true,
         title: showSearch
             ? SearchBook(
                 searchController: _searchController,
