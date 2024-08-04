@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'components/home_title.dart';
 import 'components/search_book.dart';
 import 'components/translate_button.dart';
 import 'components/book_list.dart';
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with SharedState {
   String searchKey = '';
   bool showSearch = false;
   final _searchController = TextEditingController();
@@ -68,59 +69,7 @@ class _HomePageState extends State<HomePage> {
           color: Theme.of(context).colorScheme.surface,
         ),
       ),
-      bottomNavigationBar: ValueListenableBuilder(
-        valueListenable: bibleNotifier.currentBible,
-        builder: (context, value, child) {
-          return Bookmark(bible: value);
-        },
-      ),
-    );
-  }
-}
-
-class HomeTitle extends StatelessWidget {
-  const HomeTitle({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: bibleNotifier.currentBible,
-      builder: (context, Bible bible, child) {
-        var flag = Assets.flagPtbr;
-
-        if (bible.lang == Langs.english.abbr) {
-          flag = Assets.flagUs;
-        } else if (bible.lang == Langs.french.abbr) {
-          flag = Assets.flagFr;
-        } else if (bible.lang == Langs.italian.abbr) {
-          flag = Assets.flagIt;
-        } else if (bible.lang == Langs.spanish.abbr) {
-          flag = Assets.flagEs;
-        }
-
-        return ValueListenableBuilder(
-          valueListenable: bibleNotifier.currentBible,
-          builder: (context, Bible bible, child) {
-            return Wrap(
-              spacing: 10,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                Image.asset(
-                  flag,
-                  width: 20,
-                  height: 20,
-                ),
-                Text(
-                  labels(bible.lang)['title'],
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ],
-            );
-          },
-        );
-      },
+      bottomNavigationBar: Bookmark(bible: bibleState.currentBible),
     );
   }
 }

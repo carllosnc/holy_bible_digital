@@ -13,7 +13,7 @@ class _SharedPrefs {
     final String? bibleLang = prefs.getString('bible_lang');
     final bool? lightTheme = prefs.getBool('light_theme');
 
-    await bibleNotifier.setBible(bibleLang ?? 'pt-br');
+    await bibleState.setBible(bibleLang ?? Langs.portuguese.abbr);
 
     // set bookmark pin to the bookmark notifier
     if (bookmarkPin != null) {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:holy_bible_digital/imports.dart';
+import 'package:localize/localize.dart';
+import '/imports.dart';
 
-class LanguageItem extends StatelessWidget {
+class LanguageItem extends StatefulWidget {
   final String flag;
   final String lang;
   final String currentLang;
@@ -16,33 +17,39 @@ class LanguageItem extends StatelessWidget {
   });
 
   @override
+  State<LanguageItem> createState() => _LanguageItemState();
+}
+
+class _LanguageItemState extends State<LanguageItem> with SharedState, LocalizeMixin {
+  @override
   Widget build(BuildContext context) {
     return Container(
-      color: currentLang == lang //
+      color: widget.currentLang == widget.lang //
           ? Theme.of(context).colorScheme.onSurface.withOpacity(0.1)
           : null,
       child: ListTile(
         leading: Image.asset(
-          flag,
+          widget.flag,
           width: 25,
           height: 25,
         ),
-        trailing: currentLang == lang ? const Icon(Icons.check) : null,
-        title: Text(name),
+        trailing: widget.currentLang == widget.lang ? const Icon(Icons.check) : null,
+        title: Text(widget.name),
         onTap: () {
-          bibleNotifier.setBible(lang);
+          bibleState.setBible(widget.lang);
+          localizeState.setLanguage(widget.lang);
 
           showSnackBar(
             context: context,
             content: Row(
               children: [
                 Image.asset(
-                  flag,
+                  widget.flag,
                   width: 20,
                   height: 20,
                 ),
                 const SizedBox(width: 10),
-                Text("${labels(lang)["lang changed"]} $name"),
+                Text("Language changed".localize),
               ],
             ),
           );

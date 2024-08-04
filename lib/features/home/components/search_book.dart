@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:holy_bible_digital/imports.dart';
+import 'package:localize/localize.dart';
 
-class SearchBook extends StatelessWidget {
+class SearchBook extends StatefulWidget {
   final Function onSearch;
   final TextEditingController searchController;
 
@@ -12,34 +12,34 @@ class SearchBook extends StatelessWidget {
   });
 
   @override
+  State<SearchBook> createState() => _SearchBookState();
+}
+
+class _SearchBookState extends State<SearchBook> with LocalizeMixin {
+  @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: bibleNotifier.currentBible,
-      builder: (context, Bible bible, child) {
-        return SizedBox(
-          height: 40,
-          child: TextField(
-            autofocus: true,
-            controller: searchController,
-            onChanged: (value) {
-              onSearch(value);
-            },
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 25),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50),
-                borderSide: BorderSide.none,
-              ),
-              filled: true,
-              fillColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
-              hintText: labels(bible.lang)['searchPlaceholder']!,
-              hintStyle: TextStyle(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-              ),
-            ),
+    return SizedBox(
+      height: 40,
+      child: TextField(
+        autofocus: true,
+        controller: widget.searchController,
+        onChanged: (value) {
+          widget.onSearch(value);
+        },
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 25),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(50),
+            borderSide: BorderSide.none,
           ),
-        );
-      },
+          filled: true,
+          fillColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+          hintText: "Search book".localize,
+          hintStyle: TextStyle(
+            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+          ),
+        ),
+      ),
     );
   }
 }

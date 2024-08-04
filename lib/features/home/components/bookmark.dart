@@ -1,17 +1,22 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:localize/localize.dart';
+
 import '/imports.dart';
 
 class Bookmark extends StatefulWidget {
   final Bible bible;
 
-  const Bookmark({super.key, required this.bible});
+  const Bookmark({
+    super.key,
+    required this.bible,
+  });
 
   @override
   State<Bookmark> createState() => _BookmarkState();
 }
 
-class _BookmarkState extends State<Bookmark> with SharedState {
+class _BookmarkState extends State<Bookmark> with SharedState, LocalizeMixin {
   @override
   Widget build(BuildContext context) {
     if (bookmarkState.pin == null) {
@@ -75,7 +80,7 @@ class _BookmarkState extends State<Bookmark> with SharedState {
                     };
                     context.go('$homePath/book', extra: extras);
                   },
-                  child: Text(labels(widget.bible.lang)['continue']),
+                  child: Text("Continue".localize),
                 ),
               ),
             ],

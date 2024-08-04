@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/core/extensions/string_extensions.dart';
+import 'package:localize/localize.dart';
 import '/imports.dart';
 
 class FolderPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class FolderPage extends StatefulWidget {
   State<FolderPage> createState() => _FolderPageState();
 }
 
-class _FolderPageState extends State<FolderPage> {
+class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState {
   Folder? folderDetails;
   List<Verse> verses = [];
 
@@ -49,118 +50,113 @@ class _FolderPageState extends State<FolderPage> {
       );
     }
 
-    return ValueListenableBuilder(
-      valueListenable: bibleNotifier.currentBible,
-      builder: (context, value, child) {
-        return Scaffold(
-          appBar: AppBar(
-            surfaceTintColor: Theme.of(context).colorScheme.surface,
-            title: Text(
-              folderDetails!.name.capitalize(),
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            actions: [
-              IconButton(
-                icon: const Icon(
-                  Icons.delete_outline,
-                  color: Colors.red,
-                ),
-                onPressed: () {
-                  deleteFolder(context);
-                },
-              ),
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        surfaceTintColor: Theme.of(context).colorScheme.surface,
+        title: Text(
+          folderDetails!.name.capitalize(),
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
           ),
-          body: Builder(
-            builder: (context) {
-              if (verses.isEmpty) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.folder_outlined,
-                      size: 100,
-                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-                    ),
-                    Center(
-                      child: Text(
-                        labels(value.lang)['noOneVerse'],
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ),
-                  ],
-                );
-              }
-
-              return ListView.separated(
-                itemCount: verses.length,
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                separatorBuilder: (context, index) => Divider(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-                  height: 10,
-                ),
-                addRepaintBoundaries: true,
-                itemBuilder: (context, index) {
-                  Verse verse = verses[index];
-
-                  return Dismissible(
-                    key: UniqueKey(),
-                    direction: DismissDirection.endToStart,
-                    background: Container(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 40,
-                            ),
-                            child: Icon(
-                              Icons.delete_outline,
-                              color: Theme.of(context).colorScheme.surface,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    onDismissed: (direction) async {
-                      await bibleDatabase.removeVerse(verse.id!, context);
-                      getData();
-                    },
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            verse.title.toUpperCase(),
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w800,
-                              color: Theme.of(context).colorScheme.onSurface,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            verse.content,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              );
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.delete_outline,
+              color: Colors.red,
+            ),
+            onPressed: () {
+              deleteFolder(context);
             },
           ),
-        );
-      },
+        ],
+      ),
+      body: Builder(
+        builder: (context) {
+          if (verses.isEmpty) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.folder_outlined,
+                  size: 100,
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+                ),
+                Center(
+                  child: Text(
+                    'No one verse in this folder'.localize,
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                ),
+              ],
+            );
+          }
+
+          return ListView.separated(
+            itemCount: verses.length,
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            separatorBuilder: (context, index) => Divider(
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+              height: 10,
+            ),
+            addRepaintBoundaries: true,
+            itemBuilder: (context, index) {
+              Verse verse = verses[index];
+
+              return Dismissible(
+                key: UniqueKey(),
+                direction: DismissDirection.endToStart,
+                background: Container(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40,
+                        ),
+                        child: Icon(
+                          Icons.delete_outline,
+                          color: Theme.of(context).colorScheme.surface,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                onDismissed: (direction) async {
+                  await bibleDatabase.removeVerse(verse.id!, context);
+                  getData();
+                },
+                child: ListTile(
+                  contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        verse.title.toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w800,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        verse.content,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 
@@ -168,36 +164,31 @@ class _FolderPageState extends State<FolderPage> {
     return showDialog(
       context: context,
       builder: (context) {
-        return ValueListenableBuilder(
-          valueListenable: bibleNotifier.currentBible,
-          builder: (context, value, child) {
-            return AlertDialog(
-              title: Text(labels(value.lang)['deleteFolder']),
-              content: Text(labels(value.lang)['sureToDelete']),
-              actions: <Widget>[
-                FilledButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(
-                      Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(labels(value.lang)['no']),
+        return AlertDialog(
+          title: Text('Delete folder'.localize),
+          content: Text('Are you sure you want to delete this folder?'.localize),
+          actions: <Widget>[
+            FilledButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(
+                  Theme.of(context).colorScheme.onSurface,
                 ),
-                OutlinedButton(
-                  onPressed: () {
-                    bibleDatabase.removeFolder(
-                      int.parse(widget.folderId),
-                      context,
-                    );
-                  },
-                  child: Text(labels(value.lang)['yes']),
-                ),
-              ],
-            );
-          },
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('No'.localize),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                bibleDatabase.removeFolder(
+                  int.parse(widget.folderId),
+                  context,
+                );
+              },
+              child: Text('Yes'.localize),
+            ),
+          ],
         );
       },
     );

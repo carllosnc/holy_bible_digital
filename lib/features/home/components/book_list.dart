@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:localize/localize.dart';
 import '/core/extensions/string_extensions.dart';
 import '/imports.dart';
 
-class BookList extends StatelessWidget {
+class BookList extends StatefulWidget {
   final String searchKey;
 
   const BookList({
@@ -11,64 +12,65 @@ class BookList extends StatelessWidget {
     this.searchKey = '',
   });
 
+  @override
+  State<BookList> createState() => _BookListState();
+}
+
+class _BookListState extends State<BookList> with LocalizeMixin, SharedState {
   String testament({
     required int index,
     required String lang,
   }) {
     if (index < 39) {
-      return labels(lang)["old testament"];
+      return "Old testament".localize;
     } else {
-      return labels(lang)["new testament"];
+      return "New testament".localize;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: bibleNotifier.currentBible,
-      builder: (context, Bible bible, child) {
-        var books = bible //
-            .books
-            .where((book) => book.name.toLowerCase().removeDiacritics().contains(searchKey))
-            .toList();
+    var books = bibleState
+        .currentBible //
+        .books
+        .where((book) => book.name.toLowerCase().removeDiacritics().contains(widget.searchKey))
+        .toList();
 
-        return ListView.builder(
-          itemCount: books.length,
-          itemBuilder: (context, index) {
-            Book book = books[index];
-            String chapter = labels(bible.lang)["chapter"].toString().pluralize(book.chapters.length);
+    return ListView.builder(
+      itemCount: books.length,
+      itemBuilder: (context, index) {
+        Book book = books[index];
+        String chapter = "Chapter".localize.pluralize(book.chapters.length);
 
-            return ListTile(
-              onTap: () {
-                index = bible.books.indexOf(book);
+        return ListTile(
+          onTap: () {
+            index = bibleState.currentBible.books.indexOf(book);
 
-                var extras = {
-                  'book': index,
-                  'chapter': 0,
-                };
+            var extras = {
+              'book': index,
+              'chapter': 0,
+            };
 
-                context.push('$homePath/book', extra: extras);
-              },
-              title: Text(
-                book.name,
-                style: const TextStyle(
-                  fontSize: 23,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              trailing: const Icon(Icons.chevron_right_outlined),
-              subtitle: Text(
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
-                  fontSize: 16,
-                ),
-                '${book.chapters.length} $chapter · ${testament(
-                  index: index,
-                  lang: bible.lang,
-                )}',
-              ),
-            );
+            context.push('$homePath/book', extra: extras);
           },
+          title: Text(
+            book.name,
+            style: const TextStyle(
+              fontSize: 23,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          trailing: const Icon(Icons.chevron_right_outlined),
+          subtitle: Text(
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+              fontSize: 16,
+            ),
+            '${book.chapters.length} $chapter · ${testament(
+              index: index,
+              lang: bibleState.currentBible.lang,
+            )}',
+          ),
         );
       },
     );

@@ -45,6 +45,9 @@ dependencies:
   window_manager: ^0.3.7
   sqflite: ^2.3.3+1
   path: ^1.9.0
+  localize:
+    git:
+      url: https://github.com/carllosnc/localize.git
 
 dev_dependencies:
   flutter_test:

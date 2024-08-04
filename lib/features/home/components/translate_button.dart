@@ -1,79 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:localize/localize.dart';
 import '/imports.dart';
 import 'language_item.dart';
 
-class TranslateButton extends StatelessWidget {
+class TranslateButton extends StatefulWidget {
   const TranslateButton({
     super.key,
   });
 
   @override
+  State<TranslateButton> createState() => _TranslateButtonState();
+}
+
+class _TranslateButtonState extends State<TranslateButton> with LocalizeMixin, SharedState {
+  @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: bibleNotifier.currentBible,
-      builder: (context, Bible bible, child) {
-        return IconButton(
-          icon: const Icon(
-            Icons.translate_outlined,
-          ),
-          onPressed: () {
-            showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return Scaffold(
-                  appBar: AppBar(
-                    leading: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.close),
-                    ),
-                    title: Text(
-                      labels(bible.lang)['translates'],
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
+    return IconButton(
+      icon: const Icon(
+        Icons.translate_outlined,
+      ),
+      onPressed: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.close),
+                ),
+                title: Text(
+                  "Translates".localize,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 20,
                   ),
-                  body: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        LanguageItem(
-                          flag: Assets.flagPtbr,
-                          lang: 'pt-br',
-                          currentLang: bible.lang,
-                          name: labels(bible.lang)['portuguese']!,
-                        ),
-                        LanguageItem(
-                          flag: Assets.flagUs,
-                          lang: 'en',
-                          currentLang: bible.lang,
-                          name: labels(bible.lang)['english']!,
-                        ),
-                        LanguageItem(
-                          flag: Assets.flagFr,
-                          lang: 'fr',
-                          currentLang: bible.lang,
-                          name: labels(bible.lang)['french']!,
-                        ),
-                        LanguageItem(
-                          flag: Assets.flagIt,
-                          lang: 'it',
-                          currentLang: bible.lang,
-                          name: labels(bible.lang)['italian']!,
-                        ),
-                        LanguageItem(
-                          flag: Assets.flagEs,
-                          lang: 'es',
-                          currentLang: bible.lang,
-                          name: labels(bible.lang)['spanish']!,
-                        ),
-                      ],
+                ),
+              ),
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    LanguageItem(
+                      flag: Assets.flagPtbr,
+                      lang: Langs.portuguese.abbr,
+                      currentLang: localizeState.currentLanguage,
+                      name: "Portuguese".localize,
                     ),
-                  ),
-                );
-              },
+                    LanguageItem(
+                      flag: Assets.flagUs,
+                      lang: Langs.english.abbr,
+                      currentLang: localizeState.currentLanguage,
+                      name: "English".localize,
+                    ),
+                    LanguageItem(
+                      flag: Assets.flagFr,
+                      lang: Langs.french.abbr,
+                      currentLang: localizeState.currentLanguage,
+                      name: "French".localize,
+                    ),
+                    LanguageItem(
+                      flag: Assets.flagIt,
+                      lang: Langs.italian.abbr,
+                      currentLang: localizeState.currentLanguage,
+                      name: "Italian".localize,
+                    ),
+                    LanguageItem(
+                      flag: Assets.flagEs,
+                      lang: Langs.spanish.abbr,
+                      currentLang: localizeState.currentLanguage,
+                      name: "Spanish".localize,
+                    ),
+                  ],
+                ),
+              ),
             );
           },
         );

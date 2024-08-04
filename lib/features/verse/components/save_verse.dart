@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:localize/localize.dart';
 import '/core/extensions/string_extensions.dart';
 import '/imports.dart';
 
@@ -17,7 +18,7 @@ class SaveVerse extends StatefulWidget {
   State<SaveVerse> createState() => _SaveVerseState();
 }
 
-class _SaveVerseState extends State<SaveVerse> {
+class _SaveVerseState extends State<SaveVerse> with LocalizeMixin, SharedState {
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -27,84 +28,79 @@ class _SaveVerseState extends State<SaveVerse> {
           builder: (context) {
             bibleDatabase.getFolders();
 
-            return ValueListenableBuilder(
-              valueListenable: bibleNotifier.currentBible,
-              builder: (context, Bible bible, child) {
-                return Scaffold(
-                  appBar: AppBar(
-                    leading: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.close),
-                    ),
-                    title: Text(
-                      labels(bible.lang)['folders'],
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                  ),
-                  body: StreamBuilder<List<Map<String, Object?>>>(
-                    stream: bibleDatabase.folderData.stream,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        if (snapshot.data!.isEmpty) {
-                          return Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(labels(bible.lang)['noFolders']),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                FilledButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: WidgetStateProperty.all(
-                                      Theme.of(context).colorScheme.onSurface,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    context.push("$homePath/folders");
-                                  },
-                                  child: Text(labels(bible.lang)['createFolder']),
-                                ),
-                              ],
+            return Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.close),
+                ),
+                title: Text(
+                  'Folders'.localize,
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ),
+              body: StreamBuilder<List<Map<String, Object?>>>(
+                stream: bibleDatabase.folderData.stream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    if (snapshot.data!.isEmpty) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('No folder created yet'.localize),
+                            const SizedBox(
+                              height: 10,
                             ),
-                          );
-                        }
-
-                        return ListView.builder(
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) {
-                            var folder = Folder.fromJson(snapshot.data![index]);
-
-                            return ListTile(
-                              onTap: () {
-                                saveVerse(
-                                  folderName: folder.name,
-                                  folderId: folder.id.toString(),
-                                  context: context,
-                                );
-                              },
-                              leading: const Icon(Icons.folder_outlined),
-                              title: Text(
-                                folder.name.capitalize(),
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                            FilledButton(
+                              style: ButtonStyle(
+                                backgroundColor: WidgetStateProperty.all(
+                                  Theme.of(context).colorScheme.onSurface,
                                 ),
                               ),
+                              onPressed: () {
+                                context.push("$homePath/folders");
+                              },
+                              child: Text("Create folder".localize),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        var folder = Folder.fromJson(snapshot.data![index]);
+
+                        return ListTile(
+                          onTap: () {
+                            saveVerse(
+                              folderName: folder.name,
+                              folderId: folder.id.toString(),
+                              context: context,
                             );
                           },
+                          leading: const Icon(Icons.folder_outlined),
+                          title: Text(
+                            folder.name.capitalize(),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         );
-                      } else {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    },
-                  ),
-                );
-              },
+                      },
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
             );
           },
         );

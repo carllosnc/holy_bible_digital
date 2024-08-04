@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localize/localize.dart';
 import '/imports.dart';
 
 class CreateFolderButton extends StatefulWidget {
@@ -10,7 +11,7 @@ class CreateFolderButton extends StatefulWidget {
   State<CreateFolderButton> createState() => _CreateFolderButtonState();
 }
 
-class _CreateFolderButtonState extends State<CreateFolderButton> {
+class _CreateFolderButtonState extends State<CreateFolderButton> with LocalizeMixin, SharedState {
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
 
@@ -34,70 +35,65 @@ class _CreateFolderButtonState extends State<CreateFolderButton> {
         showModalBottomSheet(
           context: context,
           builder: (context) {
-            return ValueListenableBuilder(
-              valueListenable: bibleNotifier.currentBible,
-              builder: (context, currentBible, child) {
-                return Scaffold(
-                  appBar: AppBar(
-                    title: Text(
-                      labels(currentBible.lang)['createFolder'],
-                      style: const TextStyle(fontSize: 20),
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(
+                  'Create folder'.localize,
+                  style: const TextStyle(fontSize: 20),
+                ),
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.close),
+                ),
+              ),
+              body: SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 18,
                     ),
-                    leading: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.close),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          controller: nameController,
+                          validator: (value) => value!.isEmpty //
+                              ? 'Name is required'.localize //
+                              : null,
+                          decoration: InputDecoration(
+                            suffixIcon: const Icon(Icons.folder_outlined),
+                            labelText: 'Folder name'.localize,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        FilledButton(
+                          style: ButtonStyle(
+                            backgroundColor: WidgetStateProperty.all(
+                              Theme.of(context).colorScheme.onSurface,
+                            ),
+                          ),
+                          onPressed: () {
+                            createFolder(context);
+                          },
+                          child: Text(
+                            'Create'.localize,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Theme.of(context).colorScheme.surface,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  body: SingleChildScrollView(
-                    child: Form(
-                      key: formKey,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 18,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TextFormField(
-                              controller: nameController,
-                              validator: (value) => value!.isEmpty //
-                                  ? labels(currentBible.lang)['nameIsRequired']! //
-                                  : null,
-                              decoration: InputDecoration(
-                                suffixIcon: const Icon(Icons.folder_outlined),
-                                labelText: labels(currentBible.lang)['folderName'],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            FilledButton(
-                              style: ButtonStyle(
-                                backgroundColor: WidgetStateProperty.all(
-                                  Theme.of(context).colorScheme.onSurface,
-                                ),
-                              ),
-                              onPressed: () {
-                                createFolder(context);
-                              },
-                              child: Text(
-                                labels(currentBible.lang)['create'],
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Theme.of(context).colorScheme.surface,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
+                ),
+              ),
             );
           },
         );

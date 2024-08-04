@@ -7,7 +7,7 @@ export '/core/routes/router.dart';
 export '/core/constants/assets.dart';
 export '/core/helpers/formatters.dart';
 export '/core/external/shared_preferences.dart';
-export '/core/labels/labels.dart';
+export '/core/labels/localize_labels.dart';
 export '/core/constants/langs.dart';
 
 //data
@@ -20,12 +20,13 @@ export './domain/entities/verse/verse.dart';
 export './domain/entities/folder/folder.dart';
 
 //notifiers
-export './notifiers/bible_notifier.dart';
+// export './notifiers/bible_notifier.dart';
 
 //shared states
 export './shared_states/theme_state.dart';
 export './shared_states/bookmark_state.dart';
 export './shared_states/shared_states.dart';
+export './shared_states/bible_state.dart';
 
 //pages
 export 'features/home/home_page.dart';

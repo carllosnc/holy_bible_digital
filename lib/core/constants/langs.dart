@@ -14,11 +14,11 @@ enum Langs {
       case Langs.french:
         return 'fr';
       case Langs.portuguese:
-        return 'pt';
+        return 'pt-br';
       case Langs.spanish:
         return 'es';
       default:
-        return 'ptBr';
+        return 'pt-br';
     }
   }
 }

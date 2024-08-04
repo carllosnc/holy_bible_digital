@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:localize/localize.dart';
 
 import '/imports.dart';
 
@@ -120,16 +121,11 @@ class _BibleDatabase {
       showSnackBar(
         backgroundColor: Colors.green.shade700,
         context: context,
-        content: ValueListenableBuilder(
-          valueListenable: bibleNotifier.currentBible,
-          builder: (context, value, child) {
-            return Text(
-              "${labels(value.lang)['verseAdded']} $folderName",
-              style: const TextStyle(
-                color: Colors.white,
-              ),
-            );
-          },
+        content: Text(
+          "${'Verse added to'.localize} $folderName",
+          style: const TextStyle(
+            color: Colors.white,
+          ),
         ),
       );
 
@@ -150,16 +146,11 @@ class _BibleDatabase {
       showSnackBar(
         backgroundColor: Colors.red.shade700,
         context: context,
-        content: ValueListenableBuilder(
-          valueListenable: bibleNotifier.currentBible,
-          builder: (context, value, child) {
-            return Text(
-              labels(value.lang)['verseDeleted'],
-              style: const TextStyle(
-                color: Colors.white,
-              ),
-            );
-          },
+        content: Text(
+          'Verse deleted'.localize,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
         ),
       );
     }

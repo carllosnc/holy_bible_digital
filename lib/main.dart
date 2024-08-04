@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:localize/localize.dart';
 import '/imports.dart';
 import '/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  localizeState.init(content: localizeLabels);
 
   //load preferences
   await sharedPrefs.loadPreferences();
