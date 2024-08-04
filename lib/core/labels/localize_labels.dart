@@ -2,7 +2,7 @@ import '/imports.dart';
 
 var localizeLabels = {
   Langs.portuguese.abbr: {
-    'Holy Bible': 'Bíblia sagrada',
+    'Holy Bible': 'Bíblia Sagrada',
     'Chapter': 'Capítulo',
     'Old testament': 'Velho testamento',
     'New testament': 'Novo testamento',
@@ -62,7 +62,7 @@ var localizeLabels = {
     'Verse added to': 'Verse added to',
   },
   Langs.french.abbr: {
-    'Holy Bible': 'Bible sainte',
+    'Holy Bible': 'Bible Sainte',
     'Chapter': 'Chapitre',
     'Old testament': 'Ancien testament',
     'New testament': 'Nouveau testament',
@@ -92,7 +92,7 @@ var localizeLabels = {
     'Verse added to': 'Verso ajouté à',
   },
   Langs.italian.abbr: {
-    'Holy Bible': 'Bibbia santa',
+    'Holy Bible': 'Bibbia Santa',
     'Chapter': 'Capitolo',
     'Old testament': 'Vecchio testamento',
     'New testament': 'Nuovo testamento',
