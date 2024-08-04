@@ -19,9 +19,6 @@ export './domain/entities/book/book.dart';
 export './domain/entities/verse/verse.dart';
 export './domain/entities/folder/folder.dart';
 
-//notifiers
-// export './notifiers/bible_notifier.dart';
-
 //shared states
 export './shared_states/theme_state.dart';
 export './shared_states/bookmark_state.dart';
