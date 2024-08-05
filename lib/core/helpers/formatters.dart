@@ -1,4 +1,4 @@
-extension StringExtension on String {
+extension FormatExtension on String {
   String formatNumbers() {
     return replaceAll('1', 'I').replaceAll('2', 'II').replaceAll('3', 'III');
   }

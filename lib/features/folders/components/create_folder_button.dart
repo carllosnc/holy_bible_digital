@@ -21,7 +21,11 @@ class _CreateFolderButtonState extends State<CreateFolderButton> with LocalizeMi
         name: nameController.text,
       );
 
-      await bibleDatabase.addFolder(folder, context);
+      await bibleDatabase.createFolder(folder);
+
+      if (context.mounted) {
+        Navigator.of(context).pop();
+      }
     }
 
     nameController.clear();
@@ -37,6 +41,7 @@ class _CreateFolderButtonState extends State<CreateFolderButton> with LocalizeMi
           builder: (context) {
             return Scaffold(
               appBar: AppBar(
+                forceMaterialTransparency: true,
                 title: Text(
                   'Create folder'.localize,
                   style: const TextStyle(fontSize: 20),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 appTheme({required bool isLight}) => ThemeData(
       useMaterial3: true,
       brightness: isLight ? Brightness.light : Brightness.dark,
-      colorSchemeSeed: Colors.blue,
+      colorSchemeSeed: const Color.fromARGB(255, 43, 54, 69),
       fontFamily: 'SFProDisplay',
       appBarTheme: const AppBarTheme(
         surfaceTintColor: Colors.transparent,

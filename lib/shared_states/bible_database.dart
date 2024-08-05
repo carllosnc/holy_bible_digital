@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:localize/localize.dart';
 
 import '/imports.dart';
 
@@ -26,11 +24,14 @@ var sqlCreateVerseTable = '''
   );
 ''';
 
-class _BibleDatabase {
+class _BibleDatabase extends ChangeNotifier {
   late Future<Database> _database;
 
-  final folderData = StreamController<List<Map<String, Object?>>>.broadcast();
-  final verseData = StreamController<List<Map<String, Object?>>>.broadcast();
+  var folderData = [];
+  var verseData = [];
+  Folder? currentFolder;
+
+  bool isLoading = false;
 
   init() async {
     _database = openDatabase(
@@ -46,34 +47,36 @@ class _BibleDatabase {
     );
   }
 
-  Future<void> addFolder(Folder folder, BuildContext context) async {
-    await _database.then((db) async {
-      await db.insert(
-        'folder',
-        folder.toJson(),
-      );
-    });
+  Future<void> createFolder(Folder folder) async {
+    var db = await _database;
 
-    if (context.mounted) {
-      Navigator.of(context).pop();
-    }
+    await db.insert(
+      'folder',
+      folder.toJson(),
+    );
 
-    getFolders();
+    await getFolders();
+    isLoading = false;
+    notifyListeners();
   }
 
-  Future<List<Folder>> getFolders() async {
-    final db = await _database;
+  Future<void> getFolders() async {
+    isLoading = true;
 
+    final db = await _database;
     final result = await db.query(
       'folder',
     );
 
-    folderData.add(result);
+    folderData = result.map((e) => Folder.fromJson(e)).toList();
 
-    return result.map((e) => Folder.fromJson(e)).toList();
+    isLoading = false;
+    notifyListeners();
   }
 
   Future<Folder?> getFolderById(int id) async {
+    isLoading = true;
+
     final db = await _database;
 
     final result = await db.query(
@@ -82,58 +85,50 @@ class _BibleDatabase {
       whereArgs: [id],
     );
 
+    currentFolder = Folder.fromJson(result.first);
+
     if (result.isEmpty) {
       return null;
     }
+
+    isLoading = false;
+    notifyListeners();
 
     return Folder.fromJson(result.first);
   }
 
   Future<void> removeFolder(int id, BuildContext context) async {
-    await _database.then((db) async {
-      await db.delete(
-        'folder',
-        where: 'id = ?',
-        whereArgs: [id],
-      );
-    });
+    isLoading = true;
+
+    var db = await _database;
+    await db.delete('folder', where: 'id = ?', whereArgs: [id]);
 
     getFolders();
 
-    if (context.mounted) {
-      context.go('$homePath/folders');
-    }
+    isLoading = false;
+    notifyListeners();
   }
 
   Future<void> addVerse({
     required Verse verse,
     required String folderName,
-    required BuildContext context,
   }) async {
-    await _database.then((db) async {
-      await db.insert(
-        'verse',
-        verse.toJson(),
-      );
-    });
+    isLoading = true;
 
-    if (context.mounted) {
-      showSnackBar(
-        backgroundColor: Colors.green.shade700,
-        context: context,
-        content: Text(
-          "${'Verse added to'.localize} $folderName",
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      );
+    var db = await _database;
+    await db.insert('verse', verse.toJson());
 
-      Navigator.of(context).pop();
-    }
+    isLoading = false;
+    notifyListeners();
   }
 
-  Future<void> removeVerse(int id, BuildContext context) async {
+  Future<void> removeVerse({
+    required int id,
+    required BuildContext context,
+    required int folderId,
+  }) async {
+    isLoading = true;
+
     final db = await _database;
 
     await db.delete(
@@ -142,21 +137,15 @@ class _BibleDatabase {
       whereArgs: [id],
     );
 
-    if (context.mounted) {
-      showSnackBar(
-        backgroundColor: Colors.red.shade700,
-        context: context,
-        content: Text(
-          'Verse deleted'.localize,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      );
-    }
+    await getVersesFromFolder(folderId);
+
+    isLoading = false;
+    notifyListeners();
   }
 
-  Future<List<Verse>> getVersesFromFolder(int id) async {
+  Future<void> getVersesFromFolder(int id) async {
+    isLoading = true;
+
     final db = await _database;
 
     var result = await db.query(
@@ -165,12 +154,15 @@ class _BibleDatabase {
       whereArgs: [id],
     );
 
-    return result.map((e) {
+    verseData = result.map((e) {
       return Verse.fromJson({
         ...e,
         'folderId': e['folderId'].toString(),
       });
     }).toList();
+
+    isLoading = false;
+    notifyListeners();
   }
 }
 

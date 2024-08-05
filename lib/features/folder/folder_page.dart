@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '/core/extensions/string_extensions.dart';
 import 'package:localize/localize.dart';
 import '/imports.dart';
 
@@ -16,33 +15,22 @@ class FolderPage extends StatefulWidget {
 }
 
 class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState {
-  Folder? folderDetails;
-  List<Verse> verses = [];
-
-  getData() {
-    bibleDatabase.getFolderById(int.parse(widget.folderId)).then((folder) {
-      setState(() {
-        folderDetails = folder;
-      });
-    });
-
-    bibleDatabase.getVersesFromFolder(int.parse(widget.folderId)).then((verses) {
-      setState(() {
-        this.verses = verses;
-      });
-    });
-  }
-
   @override
   void initState() {
     super.initState();
 
-    getData();
+    bibleDatabase.getFolderById(
+      int.parse(widget.folderId),
+    );
+
+    bibleDatabase.getVersesFromFolder(
+      int.parse(widget.folderId),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    if (folderDetails == null) {
+    if (bibleDatabase.isLoading) {
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -52,9 +40,10 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
 
     return Scaffold(
       appBar: AppBar(
+        forceMaterialTransparency: true,
         surfaceTintColor: Theme.of(context).colorScheme.surface,
         title: Text(
-          folderDetails!.name.capitalize(),
+          bibleDatabase.currentFolder!.name.capitalize(),
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
@@ -66,15 +55,15 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
               Icons.delete_outline,
               color: Colors.red,
             ),
-            onPressed: () {
-              deleteFolder(context);
+            onPressed: () async {
+              await deleteFolder(context);
             },
           ),
         ],
       ),
       body: Builder(
         builder: (context) {
-          if (verses.isEmpty) {
+          if (bibleDatabase.verseData.isEmpty) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -94,7 +83,7 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
           }
 
           return ListView.separated(
-            itemCount: verses.length,
+            itemCount: bibleDatabase.verseData.length,
             padding: const EdgeInsets.symmetric(vertical: 5),
             separatorBuilder: (context, index) => Divider(
               color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
@@ -102,7 +91,7 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
             ),
             addRepaintBoundaries: true,
             itemBuilder: (context, index) {
-              Verse verse = verses[index];
+              Verse verse = bibleDatabase.verseData[index];
 
               return Dismissible(
                 key: UniqueKey(),
@@ -125,8 +114,24 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
                   ),
                 ),
                 onDismissed: (direction) async {
-                  await bibleDatabase.removeVerse(verse.id!, context);
-                  getData();
+                  if (context.mounted) {
+                    showSnackBar(
+                      context: context,
+                      backgroundColor: Colors.red.shade800,
+                      content: const Text(
+                        "Verse removed",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    );
+                  }
+
+                  await bibleDatabase.removeVerse(
+                    id: verse.id!,
+                    context: context,
+                    folderId: int.parse(widget.folderId),
+                  );
                 },
                 child: ListTile(
                   contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -167,7 +172,7 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
         return AlertDialog(
           title: Text('Delete folder'.localize),
           content: Text('Are you sure you want to delete this folder?'.localize),
-          actions: <Widget>[
+          actions: [
             FilledButton(
               style: ButtonStyle(
                 backgroundColor: WidgetStateProperty.all(
@@ -180,11 +185,16 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
               child: Text('No'.localize),
             ),
             OutlinedButton(
-              onPressed: () {
-                bibleDatabase.removeFolder(
+              onPressed: () async {
+                await bibleDatabase.removeFolder(
                   int.parse(widget.folderId),
                   context,
                 );
+
+                if (context.mounted) {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                }
               },
               child: Text('Yes'.localize),
             ),

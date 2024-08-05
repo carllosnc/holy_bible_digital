@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:localize/localize.dart';
-import '/core/extensions/string_extensions.dart';
 import '/imports.dart';
 
 class BookList extends StatefulWidget {

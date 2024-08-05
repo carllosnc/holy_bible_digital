@@ -9,6 +9,7 @@ export '/core/helpers/formatters.dart';
 export '/core/external/shared_preferences.dart';
 export '/core/labels/localize_labels.dart';
 export '/core/constants/langs.dart';
+export '/core/extensions/string_extensions.dart';
 
 //data
 export '/data/repositories/bible_repository.dart';
@@ -24,6 +25,7 @@ export './shared_states/theme_state.dart';
 export './shared_states/bookmark_state.dart';
 export './shared_states/shared_states.dart';
 export './shared_states/bible_state.dart';
+export './shared_states/bible_database.dart';
 
 //pages
 export 'features/home/home_page.dart';
@@ -35,6 +37,3 @@ export 'features/folder/folder_page.dart';
 
 //platforms
 export './platforms/windows.dart';
-
-//database
-export './database/bible_database.dart';
