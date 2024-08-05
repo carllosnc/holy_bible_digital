@@ -41,9 +41,19 @@ class _FoldersPageState extends State<FoldersPage> with LocalizeMixin, SharedSta
 
         if (bibleDatabase.folderData.isEmpty) {
           return Center(
-            child: Text(
-              'No folder created yet'.localize,
-              style: const TextStyle(fontSize: 18),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.folder_outlined,
+                  size: 100,
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+                ),
+                Text(
+                  'No folder created yet'.localize,
+                  style: const TextStyle(fontSize: 18),
+                ),
+              ],
             ),
           );
         }

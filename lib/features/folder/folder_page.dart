@@ -68,7 +68,7 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.folder_outlined,
+                  Icons.menu,
                   size: 100,
                   color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
                 ),
