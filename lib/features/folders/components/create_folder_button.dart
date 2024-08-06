@@ -79,8 +79,11 @@ class _CreateFolderButtonState extends State<CreateFolderButton> with LocalizeMi
                         ),
                         FilledButton(
                           style: ButtonStyle(
+                            foregroundColor: WidgetStateProperty.all(
+                              context.buttonTextColor,
+                            ),
                             backgroundColor: WidgetStateProperty.all(
-                              Theme.of(context).colorScheme.onSurface,
+                              context.buttonColor,
                             ),
                           ),
                           onPressed: () {
@@ -88,10 +91,6 @@ class _CreateFolderButtonState extends State<CreateFolderButton> with LocalizeMi
                           },
                           child: Text(
                             'Create'.localize,
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Theme.of(context).colorScheme.surface,
-                            ),
                           ),
                         )
                       ],

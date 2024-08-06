@@ -21,7 +21,7 @@ class BookViewerBottom extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+            color: context.lineColor,
             width: 1,
           ),
         ),
@@ -75,7 +75,7 @@ class BookViewerBottom extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(200),
                 border: Border.all(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+                  color: context.lineColor,
                   width: 1,
                 ),
               ),

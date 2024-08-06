@@ -34,7 +34,7 @@ class _BookmarkState extends State<Bookmark> with SharedState, LocalizeMixin {
         color: Theme.of(context).colorScheme.surface,
         border: Border(
           top: BorderSide(
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+            color: context.lineColor,
             width: 1,
           ),
         ),
@@ -69,8 +69,11 @@ class _BookmarkState extends State<Bookmark> with SharedState, LocalizeMixin {
                 height: 30,
                 child: FilledButton(
                   style: ButtonStyle(
+                    foregroundColor: WidgetStateProperty.all<Color>(
+                      context.buttonTextColor,
+                    ),
                     backgroundColor: WidgetStateProperty.all<Color>(
-                      Theme.of(context).colorScheme.onSurface,
+                      context.buttonColor,
                     ),
                   ),
                   onPressed: () {

@@ -38,7 +38,7 @@ class VerseItem extends StatelessWidget {
             formatedContent,
             style: TextStyle(
               fontSize: 20,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+              color: context.textColor,
             ),
           ),
         ],

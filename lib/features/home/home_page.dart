@@ -52,23 +52,18 @@ class _HomePageState extends State<HomePage> with SharedState {
             },
           ),
           const TranslateButton(),
+          IconButton(
+            onPressed: () {
+              context.push('$homePath/folders');
+            },
+            icon: const Icon(
+              Icons.folder_outlined,
+            ),
+          ),
           const SetThemeButton(),
         ],
       ),
       body: BookList(searchKey: searchKey),
-      floatingActionButton: FloatingActionButton(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(50)),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.onSurface,
-        onPressed: () {
-          context.push('$homePath/folders');
-        },
-        child: Icon(
-          Icons.folder_outlined,
-          color: Theme.of(context).colorScheme.surface,
-        ),
-      ),
       bottomNavigationBar: Bookmark(bible: bibleState.currentBible),
     );
   }

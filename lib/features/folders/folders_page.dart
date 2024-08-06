@@ -51,7 +51,10 @@ class _FoldersPageState extends State<FoldersPage> with LocalizeMixin, SharedSta
                 ),
                 Text(
                   'No folder created yet'.localize,
-                  style: const TextStyle(fontSize: 18),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: context.textColor,
+                  ),
                 ),
               ],
             ),

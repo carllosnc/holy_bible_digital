@@ -92,14 +92,22 @@ class _SaveVerseState extends State<SaveVerse> with LocalizeMixin, SharedState {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('No folder created yet'.localize),
+                          Text(
+                            'No folder created yet'.localize,
+                            style: TextStyle(
+                              color: context.textColor,
+                            ),
+                          ),
                           const SizedBox(
                             height: 10,
                           ),
                           FilledButton(
                             style: ButtonStyle(
+                              foregroundColor: WidgetStateProperty.all(
+                                context.buttonTextColor,
+                              ),
                               backgroundColor: WidgetStateProperty.all(
-                                Theme.of(context).colorScheme.onSurface,
+                                context.buttonColor,
                               ),
                             ),
                             onPressed: () {

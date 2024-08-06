@@ -8,7 +8,8 @@ export '/core/constants/assets.dart';
 export '/core/external/shared_preferences.dart';
 export '/core/labels/localize_labels.dart';
 export '/core/constants/langs.dart';
-export '/core/extensions/string_extensions.dart';
+export 'core/extensions/string_extension.dart';
+export 'core/extensions/color_extension.dart';
 
 //data
 export '/data/repositories/bible_repository.dart';

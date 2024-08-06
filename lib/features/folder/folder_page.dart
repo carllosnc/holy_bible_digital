@@ -75,7 +75,10 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
                 Center(
                   child: Text(
                     'No one verse in this folder'.localize,
-                    style: const TextStyle(fontSize: 18),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: context.textColor,
+                    ),
                   ),
                 ),
               ],
@@ -175,8 +178,11 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
           actions: [
             FilledButton(
               style: ButtonStyle(
+                foregroundColor: WidgetStateProperty.all(
+                  context.buttonTextColor,
+                ),
                 backgroundColor: WidgetStateProperty.all(
-                  Theme.of(context).colorScheme.onSurface,
+                  context.buttonColor,
                 ),
               ),
               onPressed: () {

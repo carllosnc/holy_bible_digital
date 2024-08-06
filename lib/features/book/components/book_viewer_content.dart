@@ -35,7 +35,7 @@ class BookViewerContent extends StatelessWidget {
             child: ListView.separated(
               controller: verseScrollController,
               separatorBuilder: (context, index) => Divider(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+                color: context.lineColor,
                 height: 10,
               ),
               padding: const EdgeInsets.symmetric(vertical: 5),
