@@ -22,3 +22,4 @@ dart run flutter_native_splash:create
 ---
 
 Carlos Costa @ 2023
+

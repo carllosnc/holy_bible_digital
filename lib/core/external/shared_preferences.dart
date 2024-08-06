@@ -12,6 +12,7 @@ class _SharedPrefs {
     final String? bookmarkPin = prefs.getString('bookmark_pin');
     final String? bibleLang = prefs.getString('bible_lang');
     final bool? lightTheme = prefs.getBool('light_theme');
+    final double? fontSize = prefs.getDouble('font_size');
 
     await bibleState.setBible(bibleLang ?? Langs.portuguese.abbr);
 
@@ -29,7 +30,12 @@ class _SharedPrefs {
     if (lightTheme != null) {
       themeState.setLightTheme(lightTheme);
     }
+
+    // set font size to the font size notifier
+    if (fontSize != null) {
+      fontSizeState.setFontSize(fontSize);
+    }
   }
 }
 
-var sharedPrefs = _SharedPrefs();
+final sharedPrefs = _SharedPrefs();

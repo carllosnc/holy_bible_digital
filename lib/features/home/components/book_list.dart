@@ -54,16 +54,16 @@ class _BookListState extends State<BookList> with LocalizeMixin, SharedState {
           },
           title: Text(
             book.name,
-            style: const TextStyle(
-              fontSize: 23,
+            style: TextStyle(
+              fontSize: 23 * fontSizeState.ratio,
               fontWeight: FontWeight.w600,
             ),
           ),
-          trailing: const Icon(Icons.chevron_right_outlined),
+          // trailing: const Icon(Icons.chevron_right_outlined),
           subtitle: Text(
             style: TextStyle(
               color: context.textColor,
-              fontSize: 16,
+              fontSize: 16 * fontSizeState.ratio,
             ),
             '${book.chapters.length} $chapter · ${testament(
               index: index,

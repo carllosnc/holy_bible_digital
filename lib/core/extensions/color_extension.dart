@@ -4,7 +4,7 @@ import '/imports.dart';
 extension ColorExtension on BuildContext {
   Color get textColor => themeState.lightTheme //;
       ? Colors.black.withOpacity(0.7)
-      : Colors.white.withOpacity(0.45);
+      : const Color.fromRGBO(255, 255, 255, 1).withOpacity(0.45);
 
   Color get lineColor => themeState.lightTheme //;
       ? Colors.black.withOpacity(0.2)
@@ -12,7 +12,7 @@ extension ColorExtension on BuildContext {
 
   Color get buttonColor => themeState.lightTheme //;
       ? Colors.black
-      : Theme.of(this).colorScheme.secondaryContainer.withOpacity(0.6);
+      : const Color(0xFF333c48);
 
   Color get buttonTextColor => themeState.lightTheme //;
       ? Colors.white

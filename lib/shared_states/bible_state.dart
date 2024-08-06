@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '/imports.dart';
 
 class _BibleState extends ChangeNotifier {
@@ -9,8 +8,7 @@ class _BibleState extends ChangeNotifier {
     final bible = await readBibleJson(lang);
     currentBible = bible;
 
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('bible_lang', lang);
+    sharedPrefs.prefs.setString('bible', lang);
 
     notifyListeners();
   }

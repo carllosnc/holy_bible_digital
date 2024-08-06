@@ -65,6 +65,43 @@ class _HomePageState extends State<HomePage> with SharedState {
       ),
       body: BookList(searchKey: searchKey),
       bottomNavigationBar: Bookmark(bible: bibleState.currentBible),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            IconButton.filled(
+              style: IconButton.styleFrom(
+                backgroundColor: context.buttonColor,
+                foregroundColor: context.buttonTextColor,
+              ),
+              onPressed: () {
+                fontSizeState.increaseFontSize();
+              },
+              icon: const Icon(Icons.add),
+            ),
+            const SizedBox(height: 3),
+            Text(
+              fontSizeState.ratio.abs().toStringAsFixed(1),
+              style: TextStyle(
+                color: context.textColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 3),
+            IconButton.filled(
+              style: IconButton.styleFrom(
+                backgroundColor: context.buttonColor,
+                foregroundColor: context.buttonTextColor,
+              ),
+              onPressed: () {
+                fontSizeState.decreaseFontSize();
+              },
+              icon: const Icon(Icons.remove),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

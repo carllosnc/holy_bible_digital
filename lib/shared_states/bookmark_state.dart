@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '/imports.dart';
 
 class _BookmarkState extends ChangeNotifier {
   String? pin;
@@ -7,14 +7,12 @@ class _BookmarkState extends ChangeNotifier {
   setPin(String? value) async {
     pin = value;
 
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
     if (value == null) {
-      prefs.remove('bookmark_pin');
+      sharedPrefs.prefs.remove('bookmark_pin');
       return;
     }
 
-    prefs.setString('bookmark_pin', value);
+    sharedPrefs.prefs.setString('bookmark_pin', value);
 
     notifyListeners();
   }

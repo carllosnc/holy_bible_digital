@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-
-import '/imports.dart';
-
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '/imports.dart';
 
 var sqlCreateFolderTable = '''
   CREATE TABLE IF NOT EXISTS folder (

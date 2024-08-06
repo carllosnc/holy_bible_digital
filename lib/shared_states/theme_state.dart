@@ -8,6 +8,7 @@ class _ThemeState extends ChangeNotifier {
     lightTheme = value;
 
     sharedPrefs.prefs.setBool('light_theme', value);
+
     notifyListeners();
   }
 }

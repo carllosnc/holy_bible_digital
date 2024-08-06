@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '/imports.dart';
 
-class VerseItem extends StatelessWidget {
+class VerseItem extends StatefulWidget {
   final String title;
   final String content;
 
@@ -13,12 +13,17 @@ class VerseItem extends StatelessWidget {
   });
 
   @override
+  State<VerseItem> createState() => _VerseItemState();
+}
+
+class _VerseItemState extends State<VerseItem> with SharedState {
+  @override
   Widget build(BuildContext context) {
-    String formatedContent = content.replaceAll("&#x27;", "'");
+    String formatedContent = widget.content.replaceAll("&#x27;", "'");
 
     return ListTile(
       onTap: () {
-        Verse verse = Verse(title: title, content: formatedContent);
+        Verse verse = Verse(title: widget.title, content: formatedContent);
         context.push('$homePath/verse', extra: verse);
       },
       contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -26,9 +31,9 @@ class VerseItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title.toUpperCase(),
+            widget.title.toUpperCase(),
             style: TextStyle(
-              fontSize: 11,
+              fontSize: 11 * fontSizeState.ratio,
               fontWeight: FontWeight.w800,
               color: Theme.of(context).colorScheme.onSurface,
             ),
@@ -37,7 +42,7 @@ class VerseItem extends StatelessWidget {
           Text(
             formatedContent,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 20 * fontSizeState.ratio,
               color: context.textColor,
             ),
           ),
