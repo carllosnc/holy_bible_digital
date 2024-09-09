@@ -100,17 +100,17 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
                 key: UniqueKey(),
                 direction: DismissDirection.endToStart,
                 background: Container(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  child: Row(
+                  color: context.buttonColor,
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                           horizontal: 40,
                         ),
                         child: Icon(
                           Icons.delete_outline,
-                          color: Theme.of(context).colorScheme.surface,
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -121,9 +121,9 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
                     showSnackBar(
                       context: context,
                       backgroundColor: Colors.red.shade800,
-                      content: const Text(
-                        "Verse removed",
-                        style: TextStyle(
+                      content: Text(
+                        "Verse deleted".localize,
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                       ),
@@ -146,7 +146,7 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w800,
-                          color: Theme.of(context).colorScheme.onSurface,
+                          color: context.titleColor,
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -154,7 +154,7 @@ class _FolderPageState extends State<FolderPage> with LocalizeMixin, SharedState
                         verse.content,
                         style: TextStyle(
                           fontSize: 20,
-                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+                          color: context.textColor,
                         ),
                       ),
                     ],
