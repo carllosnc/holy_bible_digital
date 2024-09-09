@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../verse/components/save_verse_action.dart';
 import '/imports.dart';
 
 class VerseItem extends StatefulWidget {
@@ -26,6 +27,13 @@ class _VerseItemState extends State<VerseItem> with SharedState {
         Verse verse = Verse(title: widget.title, content: formatedContent);
         context.push('$homePath/verse', extra: verse);
       },
+      onLongPress: () {
+        saveVerseAction(
+          context: context,
+          title: widget.title,
+          content: formatedContent,
+        );
+      },
       contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +43,7 @@ class _VerseItemState extends State<VerseItem> with SharedState {
             style: TextStyle(
               fontSize: 11 * fontSizeState.ratio,
               fontWeight: FontWeight.w800,
-              color: Theme.of(context).colorScheme.onSurface,
+              color: context.titleColor,
             ),
           ),
           const SizedBox(height: 4),
