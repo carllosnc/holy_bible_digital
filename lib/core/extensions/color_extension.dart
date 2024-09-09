@@ -6,6 +6,10 @@ extension ColorExtension on BuildContext {
       ? Colors.black.withOpacity(0.7)
       : const Color.fromRGBO(255, 255, 255, 1).withOpacity(0.45);
 
+  Color get titleColor => themeState.lightTheme //;
+      ? Colors.black
+      : const Color.fromRGBO(255, 255, 255, 1).withOpacity(0.7);
+
   Color get lineColor => themeState.lightTheme //;
       ? Colors.black.withOpacity(0.2)
       : Colors.white.withOpacity(0.15);
