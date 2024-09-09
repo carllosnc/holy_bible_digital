@@ -60,9 +60,25 @@ saveVerseAction({
             },
             icon: const Icon(Icons.close),
           ),
-          title: Text(
-            'Folders'.localize,
-            style: const TextStyle(fontSize: 20),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Salvar: ",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(width: 2),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            ],
           ),
         ),
         body: Builder(

@@ -30,6 +30,7 @@ var localizeLabels = {
     'No': 'Não',
     'Verse deleted': 'Verso excluído',
     'Verse added to': 'Versículo adicionado a',
+    'Save': 'Salvar',
   },
   Langs.english.abbr: {
     'Holy Bible': 'Holy Bible',
@@ -60,6 +61,7 @@ var localizeLabels = {
     'No': 'No',
     'Verse deleted': 'Verse deleted',
     'Verse added to': 'Verse added to',
+    'Save': 'Save',
   },
   Langs.french.abbr: {
     'Holy Bible': 'Bible Sainte',
@@ -90,6 +92,7 @@ var localizeLabels = {
     'No': 'Non',
     'Verse deleted': 'Verso supprimé',
     'Verse added to': 'Verso ajouté à',
+    'Save': 'Sauvegarder',
   },
   Langs.italian.abbr: {
     'Holy Bible': 'Bibbia Santa',
@@ -120,6 +123,7 @@ var localizeLabels = {
     'No': 'No',
     'Verse deleted': 'Verso eliminato',
     'Verse added to': 'Verso aggiunto a',
+    'Save': 'Salva',
   },
   Langs.spanish.abbr: {
     'Holy Bible': 'Santa Biblia',
@@ -150,5 +154,6 @@ var localizeLabels = {
     'No': 'No',
     'Verse deleted': 'Verso eliminado',
     'Verse added to': 'Verso agregado a',
+    'Save': 'Guardar',
   },
 };
