@@ -78,7 +78,8 @@ class _FoldersPageState extends State<FoldersPage> with LocalizeMixin, SharedSta
               ),
               title: Text(
                 folder.name.capitalize(),
-                style: const TextStyle(
+                style: TextStyle(
+                  color: context.titleColor,
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                 ),

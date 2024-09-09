@@ -55,6 +55,7 @@ class _BookListState extends State<BookList> with LocalizeMixin, SharedState {
           title: Text(
             book.name,
             style: TextStyle(
+              color: context.titleColor,
               fontSize: 23 * fontSizeState.ratio,
               fontWeight: FontWeight.w600,
             ),
