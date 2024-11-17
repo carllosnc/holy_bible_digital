@@ -8,7 +8,7 @@ class _BibleState extends ChangeNotifier {
     final bible = await readBibleJson(lang);
     currentBible = bible;
 
-    sharedPrefs.prefs.setString('bible', lang);
+    sharedPrefs.prefs.setString(sharedPrefs.BIBLE_LANG, lang);
 
     notifyListeners();
   }
