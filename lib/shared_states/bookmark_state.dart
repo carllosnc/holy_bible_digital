@@ -8,11 +8,11 @@ class _BookmarkState extends ChangeNotifier {
     pin = value;
 
     if (value == null) {
-      sharedPrefs.prefs.remove('bookmark_pin');
+      sharedPrefs.prefs.remove(sharedPrefs.BOOKMARK_PIN);
       return;
     }
 
-    sharedPrefs.prefs.setString('bookmark_pin', value);
+    sharedPrefs.prefs.setString(sharedPrefs.BOOKMARK_PIN, value);
 
     notifyListeners();
   }

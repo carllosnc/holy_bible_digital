@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import '/imports.dart';
 
-bool firstTime = sharedPrefs.prefs.getBool('welcome') ?? true;
+bool firstTime = sharedPrefs.prefs.getBool(sharedPrefs.WELCOME) ?? true;
 
 String homePath = firstTime ? '/home' : '';
 

@@ -9,7 +9,7 @@ class _FontSizeState extends ChangeNotifier {
       ratio += 0.1;
     }
 
-    sharedPrefs.prefs.setDouble('font_size', ratio);
+    sharedPrefs.prefs.setDouble(sharedPrefs.FONT_SIZE, ratio);
     notifyListeners();
   }
 
@@ -18,13 +18,13 @@ class _FontSizeState extends ChangeNotifier {
       ratio -= 0.1;
     }
 
-    sharedPrefs.prefs.setDouble('font_size', ratio);
+    sharedPrefs.prefs.setDouble(sharedPrefs.FONT_SIZE, ratio);
     notifyListeners();
   }
 
   setFontSize(double value) {
     ratio = value;
-    sharedPrefs.prefs.setDouble('font_size', ratio);
+    sharedPrefs.prefs.setDouble(sharedPrefs.FONT_SIZE, ratio);
     notifyListeners();
   }
 }

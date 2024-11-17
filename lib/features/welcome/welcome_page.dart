@@ -59,7 +59,7 @@ class WelcomePage extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            sharedPrefs.prefs.setBool('welcome', false);
+            sharedPrefs.prefs.setBool(sharedPrefs.WELCOME, false);
             context.go('/home');
           },
           child: const Text('Começar'),
