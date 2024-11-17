@@ -70,11 +70,7 @@ class _HomePageState extends State<HomePage> with SharedState {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            IconButton.filled(
-              style: IconButton.styleFrom(
-                backgroundColor: context.buttonColor,
-                foregroundColor: context.buttonTextColor,
-              ),
+            IconButton.outlined(
               onPressed: () {
                 fontSizeState.increaseFontSize();
               },
@@ -83,17 +79,9 @@ class _HomePageState extends State<HomePage> with SharedState {
             const SizedBox(height: 3),
             Text(
               fontSizeState.ratio.abs().toStringAsFixed(1),
-              style: TextStyle(
-                color: context.textColor,
-                fontWeight: FontWeight.bold,
-              ),
             ),
             const SizedBox(height: 3),
-            IconButton.filled(
-              style: IconButton.styleFrom(
-                backgroundColor: context.buttonColor,
-                foregroundColor: context.buttonTextColor,
-              ),
+            IconButton.outlined(
               onPressed: () {
                 fontSizeState.decreaseFontSize();
               },
