@@ -19,6 +19,11 @@ Spash
 dart run flutter_native_splash:create
 ```
 
+Build to release
+```
+flutter build appbundle --release
+```
+
 ---
 
 Carlos Costa @ 2023
