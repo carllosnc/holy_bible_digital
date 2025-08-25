@@ -14,7 +14,7 @@ appTheme({required bool isLight}) => ThemeData(
       bottomSheetTheme: const BottomSheetThemeData(
         surfaceTintColor: Colors.transparent,
       ),
-      dialogTheme: const DialogTheme(
+      dialogTheme: const DialogThemeData(
         surfaceTintColor: Colors.transparent,
       ),
       pageTransitionsTheme: const PageTransitionsTheme(
