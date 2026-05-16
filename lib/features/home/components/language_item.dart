@@ -25,7 +25,7 @@ class _LanguageItemState extends State<LanguageItem> with SharedState, LocalizeM
   Widget build(BuildContext context) {
     return Container(
       color: widget.currentLang == widget.lang //
-          ? Theme.of(context).colorScheme.onSurface.withOpacity(0.1)
+          ? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1)
           : null,
       child: ListTile(
         leading: Image.asset(

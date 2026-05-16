@@ -33,10 +33,10 @@ class _SearchBookState extends State<SearchBook> with LocalizeMixin {
             borderSide: BorderSide.none,
           ),
           filled: true,
-          fillColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+          fillColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
           hintText: "Search book".localize,
           hintStyle: TextStyle(
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
           ),
         ),
       ),

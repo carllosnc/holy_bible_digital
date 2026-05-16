@@ -47,7 +47,7 @@ class _FoldersPageState extends State<FoldersPage> with LocalizeMixin, SharedSta
                 Icon(
                   Icons.folder_outlined,
                   size: 100,
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.2),
                 ),
                 Text(
                   'No folder created yet'.localize,
