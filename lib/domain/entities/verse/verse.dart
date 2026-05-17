@@ -1,8 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'verse.g.dart';
-
-@JsonSerializable(explicitToJson: true)
 class Verse {
   int? id;
   String title;
@@ -16,7 +11,17 @@ class Verse {
     this.id,
   });
 
-  factory Verse.fromJson(Map<String, dynamic> json) => _$VerseFromJson(json);
+  factory Verse.fromJson(Map<String, dynamic> json) => Verse(
+    title: json['title'] as String,
+    content: json['content'] as String,
+    folderId: json['folderId'] as String?,
+    id: json['id'] as int?,
+  );
 
-  Map<String, dynamic> toJson() => _$VerseToJson(this);
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'id': id,
+    'title': title,
+    'content': content,
+    'folderId': folderId,
+  };
 }
