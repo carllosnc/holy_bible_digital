@@ -14,14 +14,27 @@ Launcher icon
 dart run flutter_launcher_icons
 ```
 
-Spash
+Splash
 ```
 dart run flutter_native_splash:create
 ```
 
-Build to release
+Build to release (Standard)
 ```
 flutter build appbundle --release
+```
+
+Build to release (Shorebird)
+```
+shorebird release android
+```
+
+Note: To sign the release build, create a `key.properties` file in the `android` directory with the following content:
+```properties
+storePassword=<password>
+keyPassword=<password>
+keyAlias=<alias>
+storeFile=<path-to-keystore-file>
 ```
 
 ---
